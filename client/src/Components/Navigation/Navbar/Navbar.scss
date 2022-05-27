@@ -1,2 +1,19 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
+
+.navbar-container {
+    display: block;
+    position: relative;
+    width: 15%;
+    height: 100vh;
+    background-color: colors.$navbarBackgroundColor;
+    color: colors.$textColor;
+    &__logo {
+
+    }
+    &__menu {
+        &__list {
+            list-style: none;
+        }
+    }
+}
