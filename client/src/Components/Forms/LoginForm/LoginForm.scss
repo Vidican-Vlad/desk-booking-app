@@ -1,2 +1,5 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
+.login-form-conatiner {
+	color: colors.$textColor;
+}

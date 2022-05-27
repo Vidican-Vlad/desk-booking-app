@@ -1,7 +1,8 @@
 import React from "react";
 
 const LoginForm = () => {
-	return <div>LoginForm</div>;
+	const componentClass = "login-form-container";
+	return <div className={componentClass}>LoginForm</div>;
 };
 
 export default LoginForm;

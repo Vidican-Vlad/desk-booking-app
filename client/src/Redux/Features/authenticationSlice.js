@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { cookieTokenExists } from "../../Utils/utilFunctions";
+import { cookieTokenExists } from "../../Utils/UtilFunctions";
 
-// const isConnected = cookieTokenExists();
-const isConnected = false;
+const isConnected = cookieTokenExists();
 const initialState = {
 	isConnected: isConnected,
 	loading: false,
