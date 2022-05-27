@@ -1,5 +1,8 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
-.login-form-conatiner {
+.login-form-container {
+	position: relative;
 	color: colors.$textColor;
+	width: 80%;
+	margin: 10rem auto;
 }

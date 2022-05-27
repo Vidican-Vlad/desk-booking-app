@@ -1,3 +1,4 @@
+import "./LoginPage.scss";
 import React from "react";
 import LoginForm from "../../Forms/LoginForm/LoginForm";
 

@@ -1,3 +1,4 @@
+import "./LoginForm.scss";
 import React from "react";
 
 const LoginForm = () => {
