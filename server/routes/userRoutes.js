@@ -8,7 +8,13 @@ const {
 } = require("../middleware/UserMiddleware");
 
 // GET ALL USERS
-router.get("/users", auth, checkIfAdmin, controller.getAllUsers);
+router.get(
+	"/users",
+	auth,
+	addOwnAccToReq,
+	checkIfAdmin,
+	controller.getAllUsers,
+);
 
 // GET USER BY ID
 router.get("/getUser", auth, controller.getOwnAccount);
