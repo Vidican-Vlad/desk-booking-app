@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./routes.scss";
 import Navbar from "../Components/Navigation/Navbar/Navbar";
-import HomePage from "../Components/Pages/LandingPage/HomePage";
+import HomePage from "../Components/Pages/HomePage/HomePage";
 import LoginPage from "../Components/Pages/LoginPage/LoginPage";
 import AdminRoute from "./AdminRoute";
 import DashBoardPage from "../Components/Pages/DashBoardPage/DashBoardPage";
