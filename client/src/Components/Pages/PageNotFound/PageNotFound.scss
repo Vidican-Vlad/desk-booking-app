@@ -1,15 +1,16 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
+@use "../../../Styles/values";
 
 .page-not-found-container {
-    width: 50%;
-    margin: auto;
-    &__img {
-		width: 50%;
-		align-self: center;
-		img {
-			width: 80%;
-			margin: 0 auto;
-		}
+    width: values.$pageWidth;
+    margin-left: values.$pageMargin;
+    height: 100vh;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+		width: 60%;
 	}
 }
