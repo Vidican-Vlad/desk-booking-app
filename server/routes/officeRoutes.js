@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/officeController.js");
 const { addOwnAccToReq, checkIfAdmin, addUsertoReq } = require("../middleware/UserMiddleware")
-const { validateOfficeCreation, validateFloorCreation, addOfficeToRequest, isDeskAssignable, addDeskToReq, removeDeskFromUser, isDeskBookable, validateBookReq, addFloorToReq } =  require("../middleware/OfficeMiddleware")
+const { validateOfficeCreation, validateFloorCreation, addOfficeToRequest, isDeskAssignable, addDeskToReq, removeDeskFromUser, isDeskBookable, validateBookReq, addFloorToReq, addBookingToReq } =  require("../middleware/OfficeMiddleware")
 const auth = require("../middleware/auth");
 
 
@@ -15,5 +15,6 @@ router.put("/desk/:deskID/makeBookable", auth, addOwnAccToReq, checkIfAdmin, add
 router.put("/desk/:deskID/makeAssignable", auth, addOwnAccToReq, checkIfAdmin, addDeskToReq, controller.makeDeskAssignable);
 router.put("/desk/:deskID/unassign", auth, addOwnAccToReq, checkIfAdmin, addDeskToReq, removeDeskFromUser, controller.unassignDesk);
 router.post("/desk/:deskID/book", auth, addOwnAccToReq, addDeskToReq, isDeskBookable, validateBookReq, controller.bookDesk);
-router.get("/officeID/floor/:floorID", auth, addFloorToReq, )
+router.delete("/booking/:bookingID", auth,addOwnAccToReq, addBookingToReq, controller.cancelBooking )
+router.get("/floor/:floorID", auth, addFloorToReq, controller.getFloor );
 module.exports = router;

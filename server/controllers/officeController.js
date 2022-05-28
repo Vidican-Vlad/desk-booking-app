@@ -4,6 +4,9 @@ const Desk = require("../models/Desk");
 const isStringInvalid = require("../middleware/isStringInvalid");
 const mongoose = require("mongoose");
 const Booking = require("../models/Booking");
+const moment = require("moment");
+moment().format();
+
 
 
 
@@ -126,7 +129,7 @@ const bookDesk = async (req, res) =>{
         const booking = await Booking.create({
             desk:req.desk._id,
             Owner:req.auth._id,
-            Date: req.body.Date
+            Date: req.body.date
         })
         if(!Booking)
             res.status(400).json({msg:"There was a problem with booking this desk"});
@@ -138,16 +141,48 @@ const bookDesk = async (req, res) =>{
 
 }
 const getFloor = async (req, res) =>{
-
     try {
-        const desks = await Desk.find({FloorID: req.floor._id});
-        
+
+        let desks = await Desk.find({FloorID: req.floor._id});
+        desks = desks.map(el => {
+           return {
+                name: el.Name,
+                shape: "poly",
+                preFillColor: "Green",
+                fillColor: "Blue",
+                Bookable: el.Bookable,
+                Owner: el.Owner,
+                coords: [
+                    el.upLeft.x, el.upLeft.y,
+                    el.downLeft.x, el.downLeft.y,
+                    el.downRight.x, el.downRight.y,
+                    el.upRight.x, el.upRight.y
+                ]
+            };
+        })
+        const result = { ...req.floor.toObject(), areas: desks};
+        return res.status(200).json(result);
         
     } catch (err) {
         console.log(err);
         return res.status(400).json(err);
     }
 
+}
+
+const cancelBooking = async (req, res) =>{
+    try {
+  // console.log(!(req.auth.admin));
+        console.log(req.auth)
+        if(req.booking.Owner != req.auth._id && !(req.auth.admin))
+            return res.status(400).json({msg: "you do not have the permission to cancel this booking"})
+        await Booking.findByIdAndDelete(req.booking._id);
+        return res.status(200).json({msg: "booking was cancelled successfully!"});
+
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err);
+    }
 }
 
 const createFloor = async (req, res) =>{
@@ -214,4 +249,4 @@ function validatePoint(point)
 }
 
 
-module.exports = { createOffice, createFloor, getAllOffices, getSpecificOffice, assignDesk, makeDeskBookable, makeDeskAssignable, unassignDesk, bookDesk  }
+module.exports = { createOffice, createFloor, getAllOffices, getSpecificOffice, assignDesk, makeDeskBookable, makeDeskAssignable, unassignDesk, bookDesk, getFloor, cancelBooking }
