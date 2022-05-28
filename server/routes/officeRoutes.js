@@ -8,6 +8,6 @@ const auth = require("../middleware/auth");
 
 router.post("/", auth, addOwnAccToReq, checkIfAdmin, validateOfficeCreation, controller.createOffice);
 router.post("/:officeID/floor", auth, addOwnAccToReq, checkIfAdmin, addOfficeToRequest, validateFloorCreation, controller.createFloor);
-router.get("/", controller.getAllOffices);
-router.get("/:officeID", addOfficeToRequest, controller.getSpecificOffice);
+router.get("/", auth,  controller.getAllOffices);
+router.get("/:officeID",auth, addOfficeToRequest, controller.getSpecificOffice);
 module.exports = router;

@@ -2,6 +2,7 @@ const Office = require("../models/Office");
 const Floor = require("../models/Floor");
 const Desk = require("../models/Desk");
 const isStringInvalid = require("../middleware/isStringInvalid");
+const  mongoose = require("mongoose");
 
 
 
@@ -10,7 +11,8 @@ const createOffice = async (req, res) =>{
         
         const office = await Office.create({
             Address: req.body.Address.trim(),
-            Name: req.body.Name.trim()
+            Name: req.body.Name.trim(),
+            Telephone: req.body.Telephone.trim()
         })
         return res.status(200).json(office);
         
@@ -36,8 +38,10 @@ const getAllOffices = async (req, res) => {
 const getSpecificOffice = async (req, res) =>{
     try{
         const floors = await Floor.find({OfficeID:req.office._id});
-        console.log(req.office)
-        const result = {...req.office, floors: floors};
+        const office = req.office.toObject();
+        console.log(office);
+        
+        const result = { ...office, floors};
         res.status(200).json(result)
 
     }catch(err)

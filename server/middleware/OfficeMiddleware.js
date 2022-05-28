@@ -11,8 +11,8 @@ const Office = require("../models/Office");
 const validateOfficeCreation = (req, res, next) =>{
     try {
         
-        const { Address, Name } = req.body;
-        if( isStringInvalid(Address) || isStringInvalid(Name) )
+        const { Address, Name, Telephone } = req.body;
+        if( isStringInvalid(Address) || isStringInvalid(Name) || isStringInvalid(Telephone) )
             return res.status(400).json({msg: "missing information from request body"});
         next();
         
@@ -53,4 +53,4 @@ const addOfficeToRequest =  async (req, res, next) =>{
 }
 
 
-module.exports = { validateOfficeCreation, validateFloorCreation,addOfficeToRequest,   }
+module.exports = { validateOfficeCreation, validateFloorCreation, addOfficeToRequest,   }

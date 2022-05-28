@@ -1,7 +1,36 @@
 import "./DashboardMain.scss";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import {
+	loadOfficeFail,
+	loadOfficeInit,
+	loadOfficeSuccess,
+} from "../../../Redux/Features/officesSlice";
+import { getOffice } from "../../../Redux/API/office";
+import { useDispatch, useSelector } from "react-redux";
 const DashboardMain = () => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		const loadData = async () => {
+			try {
+				dispatch(loadOfficeInit());
+				const res = await getOffice();
+				if (!res) {
+					dispatch(loadOfficeFail("Can't load Office!"));
+				} else {
+					dispatch(loadOfficeSuccess(res));
+				}
+			} catch (error) {
+				console.log(error);
+				dispatch(loadOfficeFail(error.message));
+			}
+		};
+		loadData();
+	}, [dispatch]);
+
+	const { offices } = useSelector((state) => state.officesState);
+	console.log(offices);
+
 	const componentClass = "dashboard-main-container";
 	const headerClass = `${componentClass}__header`;
 	const officesContainerClass = `${componentClass}__offices`;
@@ -17,54 +46,23 @@ const DashboardMain = () => {
 				<Link to="/dashboard/addOffice">Add new Office</Link>
 			</div>
 			<div className={officesContainerClass}>
-				<div className={officeClass}>
-					<p className={officeNameClass}>
-						<span>Office name:</span> something sdada
-					</p>
-					<p className={officePhoneClass}>
-						<span>Phone Number:</span> 231313123123
-					</p>
-					<p className={officeAddressClass}>
-						<span>Address:</span> dsada dasdas fdsfsdfjk dasjhdasgdakmaasasfjs
-					</p>
-					<Link to="/">Show Floors</Link>
-				</div>
-				<div className={officeClass}>
-					<p className={officeNameClass}>
-						<span>Office name:</span> something sdada
-					</p>
-					<p className={officePhoneClass}>
-						<span>Phone Number:</span> 231313123123
-					</p>
-					<p className={officeAddressClass}>
-						<span>Address:</span> dsada dasdas fdsfsdfjk dasjhdasgdakmaasasfjs
-					</p>
-					<Link to="/">Show Floors</Link>
-				</div>
-				<div className={officeClass}>
-					<p className={officeNameClass}>
-						<span>Office name:</span> something sdada
-					</p>
-					<p className={officePhoneClass}>
-						<span>Phone Number:</span> 231313123123
-					</p>
-					<p className={officeAddressClass}>
-						<span>Address:</span> dsada dasdas fdsfsdfjk dasjhdasgdakmaasasfjs
-					</p>
-					<Link to="/">Show Floors</Link>
-				</div>
-				<div className={officeClass}>
-					<p className={officeNameClass}>
-						<span>Office name:</span> something sdada
-					</p>
-					<p className={officePhoneClass}>
-						<span>Phone Number:</span> 231313123123
-					</p>
-					<p className={officeAddressClass}>
-						<span>Address:</span> dsada dasdas fdsfsdfjk dasjhdasgdakmaasasfjs
-					</p>
-					<Link to="/">Show Floors</Link>
-				</div>
+				{offices &&
+					offices.map((item) => {
+						return (
+							<div className={officeClass} key={item._id}>
+								<p className={officeNameClass}>
+									<span>Office name:</span> {item.Name}
+								</p>
+								<p className={officePhoneClass}>
+									<span>Phone Number:</span> 231313123123
+								</p>
+								<p className={officeAddressClass}>
+									<span>Address:</span> {item.Address}
+								</p>
+								<Link to={`/dashboard/office/${item._id}`}>Show Floors</Link>
+							</div>
+						);
+					})}
 			</div>
 		</div>
 	);
