@@ -47,8 +47,8 @@ const LoginForm = () => {
 			if (!loginResponse.token) {
 				dispatch(loginFail("Can`t register!"));
 			}
-
-			dispatch(loginSuccess());
+			console.log(loginResponse);
+			dispatch(loginSuccess(loginResponse.isAdmin));
 
 			navigate("/");
 		} catch (error) {

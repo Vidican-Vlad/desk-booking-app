@@ -2,61 +2,65 @@
 @use "../../../Styles/colors";
 
 .navbar-container {
-    display: flex;
-    flex-direction: column;
-    width: 12%;
-    height: 100vh;
-    background-color: colors.$containerColor;
-    color: colors.$textColor;
-    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 2%),
-			0 0px 0 1px rgb(10 10 10 / 2%);
-    &__logo {
-        font-size: 2rem;
-        text-transform: uppercase;
-        margin-top: 1rem;
-        text-align: center;
-        a {
-            color: colors.$textColor;
-            text-decoration: none;
-            svg {
-                margin-right: 0.5rem;
-                transition: all 0.3s ease-in-out;
-            }
-            &:hover svg {
-                color: colors.$navbarHoverColor;
-            }
-        }
-    }
-    &__menu {
-        &__list {
-            list-style: none;
-            &__item {
-                font-size: 1.5rem;
-                margin-top: 1rem;
-                transition: all 0.3s ease-in-out;
-                padding-left: 2rem;
-                &:first-child {
-                    margin-top: 0;
-                }
-                a {
-                    text-decoration: none;
-                    color: colors.$textColor;
-                    display: block;
-                    padding: 1rem;
-                    svg {
-                        margin-right: 2rem;
-                    }
-                }
-                &:hover {
-                    background-color: colors.$navbarHoverColor;
-                    padding-left: 2.3rem;
-                }
-            }
-        }
-    }
-    &__divider {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        border-top: 2px solid colors.$backgroundColor;
-    }
+	display: flex;
+	flex-direction: column;
+	width: 12%;
+	height: 100vh;
+	background-color: colors.$containerColor;
+	color: colors.$textColor;
+	box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 2%),
+		0 0px 0 1px rgb(10 10 10 / 2%);
+	&__logo {
+		font-size: 2rem;
+		text-transform: uppercase;
+		margin-top: 1rem;
+		text-align: center;
+		a,
+		button {
+			color: colors.$textColor;
+			text-decoration: none;
+			svg {
+				margin-right: 0.5rem;
+				transition: all 0.3s ease-in-out;
+			}
+			&:hover svg {
+				color: colors.$navbarHoverColor;
+			}
+		}
+	}
+	&__menu {
+		&__list {
+			list-style: none;
+			&__item {
+				font-size: 1.5rem;
+				margin-top: 1rem;
+				transition: all 0.3s ease-in-out;
+				padding-left: 2rem;
+				&:first-child {
+					margin-top: 0;
+				}
+				a,
+				button {
+					text-decoration: none;
+					background: none;
+					border: none;
+					color: colors.$textColor;
+					display: block;
+					padding: 1rem;
+					svg {
+						margin-right: 2rem;
+					}
+				}
+				&:hover {
+					background-color: colors.$navbarHoverColor;
+					padding-left: 2.3rem;
+				}
+			}
+		}
+	}
+	&__divider {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		border-top: 2px solid colors.$backgroundColor;
+	}
 }
