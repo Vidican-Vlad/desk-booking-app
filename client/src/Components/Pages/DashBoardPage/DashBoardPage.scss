@@ -1,5 +1,17 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
 .dashboard-page-container {
-	width: 85%;
+	width: 88%;
+}
+
+@media (max-width: 1080px) {
+	.dashboard-page-container {
+		width: 80%;
+	}
+}
+
+@media (max-width: 650px) {
+	.dashboard-page-container {
+		width: 75%;
+	}
 }

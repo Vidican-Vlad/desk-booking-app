@@ -1,2 +1,16 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
+.landing-page-container {
+	width: 85%;
+}
+@media (max-width: 1080px) {
+	.landing-page-container {
+		width: 80%;
+	}
+}
+
+@media (max-width: 650px) {
+	.landing-page-container {
+		width: 75%;
+	}
+}

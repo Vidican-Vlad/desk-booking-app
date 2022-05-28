@@ -3,3 +3,14 @@
 .login-page-container {
 	width: 85%;
 }
+@media (max-width: 1080px) {
+	.login-page-container {
+		width: 80%;
+	}
+}
+
+@media (max-width: 650px) {
+	.login-page-container {
+		width: 75%;
+	}
+}
