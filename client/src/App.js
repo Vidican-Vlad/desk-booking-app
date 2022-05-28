@@ -20,9 +20,7 @@ function App() {
 		const loadData = async () => {
 			try {
 				if (isConnected) {
-					dispatch(
-						loginSuccess(getIsAdmin() === TRUE ? true : false),
-					);
+					dispatch(loginSuccess(getIsAdmin() === TRUE ? true : false));
 					dispatch(loadProfileInit());
 					const user = await getUserById();
 					if (!user) {
@@ -33,6 +31,7 @@ function App() {
 				}
 			} catch (error) {
 				console.log(error);
+				dispatch(loadProfileFail(error.message));
 			}
 		};
 		loadData();
