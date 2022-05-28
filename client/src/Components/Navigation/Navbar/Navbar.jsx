@@ -12,7 +12,8 @@ import {
 	faUsers,
 	faCircleInfo,
 	faChartLine,
-	faUserPlus
+	faUserPlus,
+	faBuildingCircleCheck
 } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../../../Redux/Features/authenticationSlice";
 import { deleteCookies } from "../../../Utils/UtilFunctions";
@@ -20,6 +21,7 @@ import { deleteCookies } from "../../../Utils/UtilFunctions";
 const Navbar = () => {
 	const { isConnected } = useSelector((state) => state.auth);
 	const { isAdmin } = useSelector((state) => state.auth);
+	const { userProfile } = useSelector((state) => state.profileSlice);
 	const dispatch = useDispatch();
 	const classComponent = "navbar-container";
 	const logoClass = `${classComponent}__logo`;
@@ -61,12 +63,6 @@ const Navbar = () => {
 					</li>
 					<li className={menuItemClass}>
 						<Link to="/">
-							<FontAwesomeIcon icon={faUsers} />
-							Users
-						</Link>
-					</li>
-					<li className={menuItemClass}>
-						<Link to="/">
 							<FontAwesomeIcon icon={faCircleInfo} />
 							About
 						</Link>
@@ -90,6 +86,18 @@ const Navbar = () => {
 								Assign account
 							</Link>
 						</li>
+						<li className={menuItemClass}>
+							<Link to="/create-office">
+								<FontAwesomeIcon icon={faBuildingCircleCheck} />
+								Create office
+							</Link>
+						</li>
+						<li className={menuItemClass}>
+							<Link to="/users">
+								<FontAwesomeIcon icon={faUsers} />
+								Users
+							</Link>
+						</li>
 					</ul>
 				</>
 			)}
@@ -103,10 +111,10 @@ const Navbar = () => {
 					</div>
 					<div className={navbarUserInfoClass}>
 						<span className={navbarUserInfoName}>
-							FirstName LastName
+							{userProfile?.firstName} {userProfile?.lastName}
 						</span>
 						<span className={navbarUserInfoEmail}>
-							email@mail.com
+							{userProfile?.email}
 						</span>
 						<span className={navbarUserInfoRole}>
 							{ isAdmin ? "Admin" : "User" }
