@@ -23,6 +23,18 @@ export const officesSlice = createSlice({
 			state.error = action.payload;
 		},
 
+		addOfficeInit: (state) => {
+			state.loading = true;
+		},
+		addOfficeSuccess: (state, action) => {
+			state.loading = false;
+			state.offices = [...state.offices, action.payload];
+			state.error = "";
+		},
+		addOfficeFail: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
 		clearOffices: (state) => {
 			state.error = "";
 			state.loading = "";
@@ -36,6 +48,9 @@ export const {
 	loadOfficeFail,
 	loadOfficeInit,
 	loadOfficeSuccess,
+	addOfficeFail,
+	addOfficeInit,
+	addOfficeSuccess,
 } = officesSlice.actions;
 
 export default officesSlice.reducer;
