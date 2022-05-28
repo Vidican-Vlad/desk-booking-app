@@ -14,6 +14,7 @@ const listener = app.listen(process.env.API_PORT, function () {
 
 const authAPI = require("./routes/authRoutes");
 const userAPI = require("./routes/userRoutes");
+const officeAPI = require("./routes/officeRoutes")
 
 app.use(bodyParser.json());
 app.use(express.json());
@@ -27,5 +28,6 @@ app.use(cookieParser());
 
 app.use("/api/auth", authAPI);
 app.use("/api/user", userAPI);
+app.use("/api/office", officeAPI);
 
 module.exports = app;

@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const isStringInvalid = require("./isStringInvalid");
 
 const addOwnAccToReq =  async (req, res, next ) =>{
     try {
@@ -63,22 +64,11 @@ const checkIfAdmin = async ( req, res, next ) =>{
     }
 }
 
-function stringInvalid (string)
-{
-    if(!string || string.trim().length < 4)
-        {
-            console.log(string);
-            return true;
-        }
-    return false;
-}
-
-
 const validateRegisterReq =  async ( req, res, next ) =>{
     try {
 
         const { email, password, firstName, lastName } = req.body;
-        if(stringInvalid(email) || !(email.includes("@")) || stringInvalid(password) || stringInvalid(firstName) || stringInvalid(lastName))
+        if(isStringInvalid(email) || !(email.includes("@")) || isStringInvalid(password) || isStringInvalid(firstName) || isStringInvalid(lastName))
             return res.status(400).json({msg: "missing or invalid data in request body"});
         next();
         
@@ -93,7 +83,7 @@ const validateLogin = async ( req, res, next ) =>{
         
         const { email, password } = req.body;
 
-        if( stringInvalid(email) || stringInvalid(password) )
+        if( isStringInvalid(email) || isStringInvalid(password) )
             return res.status(400).json({msg: "missing or invalid data in request"});
         
         const user = await User.findOne({email: email.trim().toLowerCase()});

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 var OfficeSchema = new mongoose.Schema({
-    address: { type: String, required: true},
-    name: { type: String, required: true},
+    Address: { type: String, required: true},
+    Name: { type: String, required: true},
 });
 
 
