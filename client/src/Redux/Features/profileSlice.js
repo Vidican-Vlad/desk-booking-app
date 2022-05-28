@@ -32,10 +32,10 @@ export const userProfileSlice = createSlice({
 });
 
 export const {
-	clearOffices,
-	loadOfficeFail,
-	loadOfficeInit,
-	loadOfficeSuccess,
+	loadProfileInit,
+	loadProfileSuccess,
+	loadProfileFail,
+	clearProfile,
 } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;

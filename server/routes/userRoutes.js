@@ -2,9 +2,15 @@ const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/userController");
 const auth = require("../middleware/auth");
-
+const {
+	addOwnAccToReq,
+	checkIfAdmin,
+} = require("../middleware/UserMiddleware");
 
 // GET ALL USERS
-router.get("/users", auth, controller.getAllUsers);
+router.get("/users", auth, checkIfAdmin, controller.getAllUsers);
+
+// GET USER BY ID
+router.get("/getUser", auth, controller.getUserById);
 
 module.exports = router;
