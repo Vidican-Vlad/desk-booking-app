@@ -5,6 +5,7 @@ import {
 	addOfficeFail,
 	addOfficeSuccess,
 } from "../../../Redux/Features/officesSlice";
+import createOfficeSvg from "../../../Assets/Images/CreateOfficeImage.svg";
 import TextInput from "../TextInput/TextInput";
 import { createOffice } from "../../../Redux/API/office";
 import * as Yup from "yup";
@@ -44,7 +45,7 @@ const CreateOfficeForm = () => {
 				dispatch(addOfficeFail("Can`t create office"));
 			} else {
 				dispatch(addOfficeSuccess());
-				//navigate("/");
+				navigate("/all-locations");
 			}
 		} catch (error) {
 			dispatch(addOfficeFail(error.message));
@@ -52,7 +53,9 @@ const CreateOfficeForm = () => {
 	};
 
 	const componentClass = "create-office-form-container";
-	const formContainerClass = `${componentClass}__form-container`;
+	const imgContainerClass = `${componentClass}__img`;
+	const formSideClass = `${componentClass}__form-side`;
+	const formContainerClass = `${formSideClass}__form-container`;
 	const buttonContainerClass = `${formContainerClass}__button-container`;
 
 	return (
@@ -64,32 +67,38 @@ const CreateOfficeForm = () => {
 			}}
 		>
 			<div className={componentClass}>
-				<Form className={formContainerClass}>
-					<TextInput
-						type="text"
-						id="name"
-						labelText="Name:"
-						placeholderText="Name:"
-						name="name"
-					/>
-					<TextInput
-						type="text"
-						id="address"
-						labelText="Address:"
-						placeholderText="Address:"
-						name="address"
-					/>
-					<TextInput
-						type="text"
-						id="phone"
-						labelText="Phone:"
-						placeholderText="Phone:"
-						name="phone"
-					/>
-					<div className={buttonContainerClass}>
-						<button type="submit">Create</button>
-					</div>
-				</Form>
+				<div className={imgContainerClass}>
+					<img src={createOfficeSvg} alt="office" />
+				</div>
+				<div className={formSideClass}>
+					<h1>New Office</h1>
+					<Form className={formContainerClass}>
+						<TextInput
+							type="text"
+							id="name"
+							labelText="Name:"
+							placeholderText="Name:"
+							name="name"
+						/>
+						<TextInput
+							type="text"
+							id="address"
+							labelText="Address:"
+							placeholderText="Address:"
+							name="address"
+						/>
+						<TextInput
+							type="text"
+							id="phone"
+							labelText="Phone:"
+							placeholderText="Phone:"
+							name="phone"
+						/>
+						<div className={buttonContainerClass}>
+							<button type="submit">Create</button>
+						</div>
+					</Form>
+				</div>
 			</div>
 		</Formik>
 	);

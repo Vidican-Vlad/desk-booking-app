@@ -1,8 +1,4 @@
-import {
-	adminToCookie,
-	getToken,
-	tokenToCookie,
-} from "../../Utils/UtilFunctions";
+import { getToken } from "../../Utils/UtilFunctions";
 import axiosInstance from "../Axios/AxiosInstance";
 
 export const getAllUsers = () => {
@@ -14,7 +10,7 @@ export const getAllUsers = () => {
 					"Content-type": "application/json",
 				},
 			};
-			const res = await axiosInstance.post("/user/users", requestHeader);
+			const res = await axiosInstance.get("/user/users", requestHeader);
 			resolve(res.data);
 		} catch (error) {
 			console.log(error);
@@ -26,6 +22,7 @@ export const getAllUsers = () => {
 export const getUserById = () => {
 	return new Promise(async (resolve, reject) => {
 		try {
+			console.log(getToken());
 			const requestHeader = {
 				headers: {
 					authorization: `Bearer ${getToken()}`,

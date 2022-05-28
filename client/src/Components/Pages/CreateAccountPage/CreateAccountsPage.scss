@@ -1,9 +1,14 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
 @use "../../../Styles/values";
+
 .create-accounts-page-container {
 	width: values.$pageWidth;
 	margin-left: values.$pageMargin;
+	height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 1080px) {

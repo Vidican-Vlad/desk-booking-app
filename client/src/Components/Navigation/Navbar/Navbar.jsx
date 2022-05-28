@@ -83,7 +83,7 @@ const Navbar = () => {
 						<li className={menuItemClass}>
 							<Link to="/create-account">
 								<FontAwesomeIcon icon={faUserPlus} />
-								Assign account
+								Create account
 							</Link>
 						</li>
 						<li className={menuItemClass}>
@@ -93,9 +93,9 @@ const Navbar = () => {
 							</Link>
 						</li>
 						<li className={menuItemClass}>
-							<Link to="/users">
+							<Link to="/all-users">
 								<FontAwesomeIcon icon={faUsers} />
-								Users
+								All users
 							</Link>
 						</li>
 					</ul>

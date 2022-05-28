@@ -4,6 +4,7 @@ import authenticationReducer from "./Features/authenticationSlice";
 import officesReducer from "./Features/officesSlice";
 import officeDetailsReducer from "./Features/officeDetailsSlice";
 import userProfileReducer from "./Features/profileSlice";
+import usersReducer from "./Features/usersSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -11,5 +12,6 @@ export const store = configureStore({
 		officesState: officesReducer,
 		profileSlice: userProfileReducer,
 		officeDetails: officeDetailsReducer,
+		usersState: usersReducer,
 	},
 });

@@ -34,7 +34,7 @@ const ShowFloor = () => {
 		loadData();
 	}, [dispatch, officeId]);
 	const { floors } = useSelector((state) => state.officeDetails).office;
-	const floor = floors && floors.filter((item) => item._id === floorId);
+	const floor = floors && floors.filter((item) => item?._id === floorId);
 
 	const MAP = {
 		name: "my-map",
@@ -70,11 +70,11 @@ const ShowFloor = () => {
 	console.log(floor[0]);
 	return (
 		<div>
-			{/* {floor && floor.length && <img src={floor[0]?.Image} alt="map" />} */}
+			{floor && floor.length && <img src={floor[0]?.Image} alt="map" />}
 			<ImageMapper
 				src={floor[0].Image}
 				map={MAP}
-				// width={500}
+				width={500}
 				// onLoad={() => this.load()}
 				// onClick={(area) => this.clicked(area)}
 				// onMouseEnter={(area) => this.enterArea(area)}

@@ -1,0 +1,16 @@
+@use "../../../Styles/default";
+@use "../../../Styles/colors";
+@use "../../../Styles/values";
+
+.all-users-container {
+	margin: 2rem 4rem;
+	min-height: 80%;
+	background: colors.$containerColor;
+	color: colors.$textColor;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 5rem;
+	border-radius: 5px;
+	box-shadow: values.$boxShadow;
+}

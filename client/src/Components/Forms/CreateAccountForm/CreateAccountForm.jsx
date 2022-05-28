@@ -32,7 +32,7 @@ const CreateAccountForm = () => {
 			.required("Password required!")
 			.matches(
 				/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-				"min 6 len = 0-9,a-z,A-Z and special"
+				"min 6 len = 0-9,a-z,A-Z and special",
 			),
 		rePassword: Yup.string()
 			.oneOf([Yup.ref("password"), null], "Password need to match!")
@@ -74,17 +74,15 @@ const CreateAccountForm = () => {
 			initialValues={initialValues}
 			validationSchema={validate}
 			onSubmit={(values) => {
-				console.log("clivk");
 				submitHandler(values);
 			}}
 		>
 			<div className={componentClass}>
-				{" "}
 				<div className={imgContainerClass}>
 					<img src={CreateAccountSvg} alt="create-account-svg" />
 				</div>
 				<div className={formSideClass}>
-					<h1>Employee Assign Account</h1>
+					<h1>New Account</h1>
 					<Form className={formContainerClass}>
 						<TextInput
 							type="text"

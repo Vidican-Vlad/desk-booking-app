@@ -13,6 +13,7 @@ import AllLocationPage from "../Components/Pages/AllLocationsPage/AllLocationPag
 import CreateOfficePage from "../Components/Pages/CreateOfficePage/CreateOfficePage";
 import CreateFloorPage from "../Components/Pages/CreateFloorPage/CreateFloorPage";
 import ShowFloorPage from "../Components/Pages/ShowFloorPage/ShowFloorPage";
+import AllUsersPage from "../Components/Pages/AllUsersPage/AllUsersPage";
 
 const WebRoutes = () => {
 	const componentClass = "web-routes-container";
@@ -86,6 +87,14 @@ const WebRoutes = () => {
 								element={
 									<PrivateRoute>
 										<AllLocationPage />
+									</PrivateRoute>
+								}
+							/>
+							<Route
+								path="/all-users"
+								element={
+									<PrivateRoute>
+										<AllUsersPage />
 									</PrivateRoute>
 								}
 							/>
