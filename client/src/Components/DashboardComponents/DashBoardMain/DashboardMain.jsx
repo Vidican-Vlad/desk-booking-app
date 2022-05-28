@@ -29,7 +29,6 @@ const DashboardMain = () => {
 	}, [dispatch]);
 
 	const { offices } = useSelector((state) => state.officesState);
-	console.log(offices);
 
 	const componentClass = "dashboard-main-container";
 	const headerClass = `${componentClass}__header`;
@@ -54,7 +53,7 @@ const DashboardMain = () => {
 									<span>Office name:</span> {item.Name}
 								</p>
 								<p className={officePhoneClass}>
-									<span>Phone Number:</span> 231313123123
+									<span>Phone Number:</span> {item.Telephone}
 								</p>
 								<p className={officeAddressClass}>
 									<span>Address:</span> {item.Address}

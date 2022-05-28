@@ -18,3 +18,21 @@ export const getOffice = () => {
 		}
 	});
 };
+
+export const getFloors = (officeId) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const requestHeader = {
+				headers: {
+					authorization: `Bearer ${getToken()}`,
+					"Content-type": "application/json",
+				},
+			};
+			const res = await axiosInstance.get(`/office/${officeId}`, requestHeader);
+			resolve(res.data);
+		} catch (error) {
+			console.log(error);
+			reject(error);
+		}
+	});
+};
