@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./routes.scss";
 import Navbar from "../Components/Navigation/Navbar/Navbar";
-import LandingPage from "../Components/Pages/LandingPage/LandingPage";
+import HomePage from "../Components/Pages/LandingPage/HomePage";
 import LoginPage from "../Components/Pages/LoginPage/LoginPage";
 import AdminRoute from "./AdminRoute";
 import DashBoardPage from "../Components/Pages/DashBoardPage/DashBoardPage";
@@ -19,7 +19,7 @@ const WebRoutes = () => {
 					<Navbar />
 					<>
 						<Routes>
-							<Route path="/" element={<LandingPage />} />
+							<Route path="/" element={<HomePage />} />
 							<Route path="/login" element={<LoginPage />} />
 							<Route
 								path="/dashboard"
