@@ -2,6 +2,12 @@
 @use "../../../Styles/colors";
 .dashboard-page-container {
 	width: 88%;
+	&--title {
+		color: white;
+		font-size: 3rem;
+		text-align: center;
+		padding: 2rem 0;
+	}
 }
 
 @media (max-width: 1080px) {

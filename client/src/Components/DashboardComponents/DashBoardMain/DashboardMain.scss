@@ -1,0 +1,71 @@
+@use "../../../Styles/default";
+@use "../../../Styles/colors";
+
+.dashboard-main-container {
+	margin: 2rem 4rem;
+	min-height: 80%;
+	background: colors.$containerColor;
+	color: colors.$textColor;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 5rem;
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: 0 4rem;
+		margin-top: 3rem;
+		h2 {
+			font-size: 2rem;
+		}
+		a {
+			text-decoration: none;
+			font-size: 1.8rem;
+			padding: 0.5rem 1rem;
+			border: none;
+			border-radius: 50px;
+			background: colors.$yellowgreen;
+			color: black;
+			transition: all 0.3s ease;
+			&:hover {
+				box-shadow: 2px 3px 7px 4px rgba(white, 0.4),
+					2px 3px 7px 4px rgba(black, 0.4);
+			}
+		}
+	}
+	&__offices {
+		margin: 0 4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		font-size: 1.6rem;
+		&__office {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+			align-items: flex-start;
+			p {
+				span {
+					font-weight: 900;
+					color: colors.$orange;
+				}
+			}
+			a {
+				text-decoration: none;
+				font-size: 1.2rem;
+
+				padding: 0.5rem 1rem;
+				border: none;
+				border-radius: 50px;
+				background: colors.$orange;
+				color: black;
+				transition: all 0.3s ease;
+				&:hover {
+					box-shadow: 2px 3px 5px 1px rgba(white, 0.4),
+						2px 3px 5px 1px rgba(black, 0.4);
+				}
+			}
+		}
+	}
+}
