@@ -30,6 +30,14 @@ const WebRoutes = () => {
 								}
 							/>
 							<Route
+								path="/dashboard/office/:officeId"
+								element={
+									<AdminRoute>
+										<DashBoardPage />
+									</AdminRoute>
+								}
+							/>
+							<Route
 								path="/create-account"
 								element={
 									<AdminRoute>
