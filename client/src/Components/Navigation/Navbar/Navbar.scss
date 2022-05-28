@@ -51,6 +51,11 @@
 						margin-right: 2rem;
 					}
 				}
+                button {
+                    cursor: pointer;
+                    width: -webkit-fill-available;
+                    text-align: left;
+                }
 				&:hover {
 					background-color: colors.$navbarHoverColor;
 					padding-left: 2.3rem;
