@@ -1,6 +1,5 @@
 import "./CreateFloorForm.scss";
 import React, { useState } from "react";
-import imageToBase64 from "image-to-base64/browser";
 import { useDispatch } from "react-redux";
 import {
 	createFloorStateFail,
@@ -25,18 +24,25 @@ const CreateFloorForm = () => {
 			setJsonUploaded(true);
 		};
 	};
+	const convertToBase64 = (file) => {
+		return new Promise((resolve, reject) => {
+			const fileReader = new FileReader();
+			fileReader.readAsDataURL(file);
+			fileReader.onload = () => {
+				resolve(fileReader.result);
+			};
+			fileReader.onerror = (error) => {
+				reject(error);
+			};
+		});
+	};
 
-	const handleChangePng = (e) => {
-		imageToBase64(e.target.files) // Path to the image
-			.then((response) => {
-				const updatedFiles = files;
-				updatedFiles.Image = response;
-				setFiles(updatedFiles);
-				updatedFiles.console.log(response);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+	const handleChangePng = async (e) => {
+		const file = e.target.files[0];
+		const base64 = await convertToBase64(file);
+		const updatedFiles = files;
+		updatedFiles.Image = base64;
+		setFiles(updatedFiles);
 	};
 
 	const handleSubmit = async () => {

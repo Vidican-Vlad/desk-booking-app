@@ -12,6 +12,7 @@ import PageNotFound from "../Components/Pages/PageNotFound/PageNotFound";
 import AllLocationPage from "../Components/Pages/AllLocationsPage/AllLocationPage";
 import CreateOfficePage from "../Components/Pages/CreateOfficePage/CreateOfficePage";
 import CreateFloorPage from "../Components/Pages/CreateFloorPage/CreateFloorPage";
+import ShowFloorPage from "../Components/Pages/ShowFloorPage/ShowFloorPage";
 
 const WebRoutes = () => {
 	const componentClass = "web-routes-container";
@@ -45,6 +46,14 @@ const WebRoutes = () => {
 								element={
 									<AdminRoute>
 										<CreateFloorPage />
+									</AdminRoute>
+								}
+							/>
+							<Route
+								path="/dashboard/office/:officeId/floor/:floorId"
+								element={
+									<AdminRoute>
+										<ShowFloorPage />
 									</AdminRoute>
 								}
 							/>

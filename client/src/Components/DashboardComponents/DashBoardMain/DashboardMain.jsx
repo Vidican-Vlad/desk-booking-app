@@ -48,17 +48,19 @@ const DashboardMain = () => {
 				{offices &&
 					offices.map((item) => {
 						return (
-							<div className={officeClass} key={item._id}>
+							<div className={officeClass} key={item && item._id}>
 								<p className={officeNameClass}>
-									<span>Office name:</span> {item.Name}
+									<span>Office name:</span> {item && item.Name}
 								</p>
 								<p className={officePhoneClass}>
-									<span>Phone Number:</span> {item.Telephone}
+									<span>Phone Number:</span> {item && item.Telephone}
 								</p>
 								<p className={officeAddressClass}>
-									<span>Address:</span> {item.Address}
+									<span>Address:</span> {item && item.Address}
 								</p>
-								<Link to={`/dashboard/office/${item._id}`}>Show Floors</Link>
+								<Link to={`/dashboard/office/${item && item._id}`}>
+									Show Floors
+								</Link>
 							</div>
 						);
 					})}

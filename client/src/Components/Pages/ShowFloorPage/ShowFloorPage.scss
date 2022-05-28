@@ -1,0 +1,21 @@
+@use "../../../Styles/default";
+@use "../../../Styles/colors";
+@use "../../../Styles/values";
+.show-floor-page-container {
+	width: values.$pageWidth;
+	margin-left: values.$pageMargin;
+}
+
+@media (max-width: 1080px) {
+	.show-floor-page-container {
+		width: 80%;
+		margin-left: 20%;
+	}
+}
+
+@media (max-width: 650px) {
+	.show-floor-page-container {
+		width: 75%;
+		margin-left: 25%;
+	}
+}
