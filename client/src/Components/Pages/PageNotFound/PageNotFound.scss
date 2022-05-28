@@ -1,2 +1,15 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
+
+.page-not-found-container {
+    width: 50%;
+    margin: auto;
+    &__img {
+		width: 50%;
+		align-self: center;
+		img {
+			width: 80%;
+			margin: 0 auto;
+		}
+	}
+}

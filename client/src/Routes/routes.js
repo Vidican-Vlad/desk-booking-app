@@ -8,6 +8,7 @@ import DashBoardPage from "../Components/Pages/DashBoardPage/DashBoardPage";
 import ProfilePage from "../Components/Pages/ProfilePage/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 import CreateAccountsPage from "../Components/Pages/CreateAccountPage/CreateAccountsPage";
+import PageNotFound from "../Components/Pages/PageNotFound/PageNotFound";
 
 const WebRoutes = () => {
 	const componentClass = "web-routes-container";
@@ -44,7 +45,7 @@ const WebRoutes = () => {
 									</PrivateRoute>
 								}
 							/>
-							<Route path="*" element={<div>404</div>} />
+							<Route path="*" element={<PageNotFound />} />
 						</Routes>
 					</>
 				</div>

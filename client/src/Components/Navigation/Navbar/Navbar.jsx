@@ -11,7 +11,8 @@ import {
 	faLocation,
 	faUsers,
 	faCircleInfo,
-	faChartLine
+	faChartLine,
+	faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../../../Redux/Features/authenticationSlice";
 import { deleteCookies } from "../../../Utils/UtilFunctions";
@@ -81,6 +82,12 @@ const Navbar = () => {
 							<Link to="/dashboard">
 								<FontAwesomeIcon icon={faChartLine} />
 								Dashboard
+							</Link>
+						</li>
+						<li className={menuItemClass}>
+							<Link to="/create-account">
+								<FontAwesomeIcon icon={faUserPlus} />
+								Assign account
 							</Link>
 						</li>
 					</ul>
