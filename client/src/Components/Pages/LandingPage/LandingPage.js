@@ -2,7 +2,8 @@ import "./LandingPage.scss";
 import React from "react";
 
 const LandingPage = () => {
-	return <div>LandingPage</div>;
+	const componentClass = "landing-page-container";
+	return <div className={componentClass}>LandingPage</div>;
 };
 
 export default LandingPage;

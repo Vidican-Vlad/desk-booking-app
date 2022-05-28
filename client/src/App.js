@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { boolean } from "yup";
 import "./App.scss";
 import { loginSuccess } from "./Redux/Features/authenticationSlice";
 import WebRoutes from "./Routes/routes";

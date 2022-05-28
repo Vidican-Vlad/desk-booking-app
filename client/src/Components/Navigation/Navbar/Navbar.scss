@@ -69,3 +69,31 @@
 		border-top: 2px solid colors.$backgroundColor;
 	}
 }
+
+@media (max-width: 1080px) {
+	.navbar-container {
+		width: 20%;
+	}
+}
+
+@media (max-width: 650px) {
+	.navbar-container {
+		width: 25%;
+		&__logo {
+			font-size: 1.5rem;
+		}
+		&__menu {
+			&__list {
+				&__item {
+					padding-left: 0rem;
+					a,
+					button {
+						svg {
+							margin-right: 0.5rem;
+						}
+					}
+				}
+			}
+		}
+	}
+}
