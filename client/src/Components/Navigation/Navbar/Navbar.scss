@@ -29,6 +29,10 @@
 		}
 	}
 	&__menu {
+        &__header {
+            margin-left: 3rem;
+            color: #ffffff90 ;
+        }
 		&__list {
 			list-style: none;
 			&__item {
@@ -68,6 +72,28 @@
 		margin-bottom: 1rem;
 		border-top: 2px solid colors.$backgroundColor;
 	}
+    &__user {
+        display: flex;
+        margin-left: 2rem;
+        padding: 1rem;
+        &__avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            background-color: white;
+        }
+        &__info {
+            display: flex;
+            flex-direction: column;
+            &__name {
+                font-weight: bold;
+            }
+            &__email, &__role {
+                color: #ffffff60;
+            }
+        }
+    }
 }
 
 @media (max-width: 1080px) {
