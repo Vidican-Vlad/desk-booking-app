@@ -9,6 +9,7 @@ var UserSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
+	desk: { type: mongoose.Schema.Types.ObjectId, ref: "Desk", default:null}
 	
 });
 
