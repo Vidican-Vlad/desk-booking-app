@@ -1,0 +1,17 @@
+@use "../../../Styles/default";
+@use "../../../Styles/colors";
+
+.text-input-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+	input {
+		padding: 1rem 1rem;
+		border-radius: 5px;
+		font-size: 1.2rem;
+	}
+	label {
+		font-size: 1.5rem;
+	}
+}
