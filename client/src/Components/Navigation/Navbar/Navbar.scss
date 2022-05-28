@@ -2,6 +2,7 @@
 @use "../../../Styles/colors";
 
 .navbar-container {
+	position: fixed;
 	display: flex;
 	flex-direction: column;
 	width: 12%;

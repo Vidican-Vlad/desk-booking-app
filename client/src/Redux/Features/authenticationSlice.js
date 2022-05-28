@@ -18,7 +18,6 @@ export const authenticationSlice = createSlice({
 		},
 		registerSuccess: (state) => {
 			state.loading = false;
-			state.isConnected = true;
 			state.error = "";
 		},
 		registerFail: (state, action) => {

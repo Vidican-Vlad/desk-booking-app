@@ -45,7 +45,7 @@ const LoginForm = () => {
 
 			const loginResponse = await userLogin(loginValues);
 			if (!loginResponse.token) {
-				dispatch(loginFail("Can`t register!"));
+				dispatch(loginFail("Can`t login!"));
 			}
 			console.log(loginResponse);
 			dispatch(loginSuccess(loginResponse.isAdmin));

@@ -2,6 +2,7 @@
 @use "../../../Styles/colors";
 .dashboard-page-container {
 	width: 88%;
+	margin-left: 12%;
 	&--title {
 		color: white;
 		font-size: 3rem;
@@ -13,11 +14,13 @@
 @media (max-width: 1080px) {
 	.dashboard-page-container {
 		width: 80%;
+		margin-left: 20%;
 	}
 }
 
 @media (max-width: 650px) {
 	.dashboard-page-container {
 		width: 75%;
+		margin-left: 25%;
 	}
 }

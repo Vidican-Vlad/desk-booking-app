@@ -2,16 +2,19 @@
 @use "../../../Styles/colors";
 .create-accounts-page-container {
 	width: 88%;
+	margin-left: 12%;
 }
 
 @media (max-width: 1080px) {
 	.create-accounts-page-container {
 		width: 80%;
+		margin-left: 20%;
 	}
 }
 
 @media (max-width: 650px) {
 	.create-accounts-page-container {
 		width: 75%;
+		margin-left: 25%;
 	}
 }
