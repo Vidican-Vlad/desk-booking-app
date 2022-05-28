@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const listener = app.listen(7055, function () {
+const listener = app.listen(process.env.API_PORT, function () {
 	console.log("Listening on port " + listener.address().port);
 });
 
@@ -25,7 +25,7 @@ app.use(
 );
 app.use(cookieParser());
 
-app.use("/auth", authAPI);
-app.use("/user", userAPI);
+app.use("/api/auth", authAPI);
+app.use("/api/user", userAPI);
 
 module.exports = app;

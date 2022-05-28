@@ -3,18 +3,26 @@ const jwt = require("jsonwebtoken");
 const config = process.env;
 
 const auth = (req, res, next) => {
-	const token = req.headers["x-access-token"];
-	if (!token) {
-		return res.status(403).json({ message: "Token is required for login" });
-	}
-	try {
-		const decoded = jwt.verify(token, config.TOKEN_KEY);
-		req.user = decoded;
-		next();
-	} catch (err) {
-		console.log(err);
-		res.status(400).json({ message: "Token is not valid" });
-	}
+    let token;
+
+    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer"))
+    {
+        try {
+
+            token = req.headers.authorization.split(" ")[1];
+            const decoded = jwt.verify(token, process.env.AUTH_TOKEN_SECRET);
+            req.auth = decoded;
+            res.locals.user = decoded;
+            next();
+            
+        } catch (error) {
+            console.error(error.message);
+            return res.status(400).send({ errors: [{ msg: "TOKEN_INVALID" }] });
+        }
+    }
+    if (!token) {
+        return res.status(403).json({ errors: [{ msg: 'TOKEN_REQUIRED' }] });
+    }
 };
 
 module.exports = auth;

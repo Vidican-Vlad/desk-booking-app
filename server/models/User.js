@@ -5,10 +5,11 @@ var UserSchema = new mongoose.Schema({
 	password: { type: String, required: true, minlength: 6 },
 	firstName: { type: String, required: true },
 	lastName: { type: String, required: true },
-	role: {
+	admin: {
 		type: Boolean,
 		default: false,
 	},
+	
 });
 
 module.exports = mongoose.model("User", UserSchema);
