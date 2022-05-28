@@ -1,16 +1,17 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
-.login-page-container {
+.create-accounts-page-container {
 	width: 88%;
 }
+
 @media (max-width: 1080px) {
-	.login-page-container {
+	.create-accounts-page-container {
 		width: 80%;
 	}
 }
 
 @media (max-width: 650px) {
-	.login-page-container {
+	.create-accounts-page-container {
 		width: 75%;
 	}
 }
