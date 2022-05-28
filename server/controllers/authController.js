@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
 			password: await hashPass(req.body.password.trim()),
 		});
 
-		return res.status(200).json(user);
+		return res.status(200).json({email, firstName, lastName, admin} = user);
 	} catch (err) {
 		console.log(err);
 		return res.status(400).json(err);

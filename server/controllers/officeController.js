@@ -20,6 +20,33 @@ const createOffice = async (req, res) =>{
     }
 }
 
+const getAllOffices = async (req, res) => {
+    try{
+
+        const offices = await Office.find({});
+        return res.status(200).json(offices);
+
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err);
+    }
+
+}
+
+const getSpecificOffice = async (req, res) =>{
+    try{
+        const floors = await Floor.find({OfficeID:req.office._id});
+        console.log(req.office)
+        const result = {...req.office, floors: floors};
+        res.status(200).json(result)
+
+    }catch(err)
+    {
+        console.log(err);
+        return res.status(400).json(err);
+    }
+}
+
 const createFloor = async (req, res) =>{
     try {
         promises = [];
@@ -82,4 +109,4 @@ function validatePoint(point)
 }
 
 
-module.exports = { createOffice, createFloor  }
+module.exports = { createOffice, createFloor, getAllOffices, getSpecificOffice  }
