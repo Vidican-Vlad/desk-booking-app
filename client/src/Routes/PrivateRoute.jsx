@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router";
-import { getToken } from "../Utils/utilFunctions";
+import { getToken } from "../Utils/UtilFunctions";
 
 const PrivateRoute = ({ children }) => {
 	return getToken() ? children : <Navigate to="/login" />;
