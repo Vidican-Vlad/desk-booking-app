@@ -3,6 +3,7 @@ const Floor = require("../models/Floor");
 const Desk = require("../models/Desk");
 const isStringInvalid = require("../middleware/isStringInvalid");
 const mongoose = require("mongoose");
+const Booking = require("../models/Booking");
 
 
 
@@ -120,6 +121,35 @@ const getSpecificOffice = async (req, res) =>{
     }
 }
 
+const bookDesk = async (req, res) =>{
+    try {
+        const booking = await Booking.create({
+            desk:req.desk._id,
+            Owner:req.auth._id,
+            Date: req.body.Date
+        })
+        if(!Booking)
+            res.status(400).json({msg:"There was a problem with booking this desk"});
+        return res.status(200).json(booking);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err);
+    }
+
+}
+const getFloor = async (req, res) =>{
+
+    try {
+        const desks = await Desk.find({FloorID: req.floor._id});
+        
+        
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err);
+    }
+
+}
+
 const createFloor = async (req, res) =>{
     try {
         promises = [];
@@ -164,6 +194,8 @@ async function createDeskPromise(desk, OfficeID, FloorID){
         return null
 }
 
+
+
 function validateDesk(desk){
     //console.log(desk);
     //console.log(isStringInvalid(desk.name, 3));
@@ -182,4 +214,4 @@ function validatePoint(point)
 }
 
 
-module.exports = { createOffice, createFloor, getAllOffices, getSpecificOffice, assignDesk, makeDeskBookable, makeDeskAssignable, unassignDesk  }
+module.exports = { createOffice, createFloor, getAllOffices, getSpecificOffice, assignDesk, makeDeskBookable, makeDeskAssignable, unassignDesk, bookDesk  }

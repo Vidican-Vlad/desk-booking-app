@@ -3,6 +3,9 @@ const Desk = require("../models/Desk");
 const isStringInvalid = require("./isStringInvalid");
 const Office = require("../models/Office");
 const User = require("../models/User");
+const moment = require("moment");
+const Booking = require("../models/Booking");
+moment().format();
 
 
 const validateOfficeCreation = (req, res, next) =>{
@@ -66,6 +69,19 @@ const removeDeskFromUser = async (req, res, next) =>{
     }
 }
 
+const isDeskBookable = (req, res, next) =>{
+    try {
+
+        if(!(req.desk.Bookable))
+            return res.status(400).json({msg: "These type of desk can't be booked"});
+        next();
+        
+    } catch (err) {
+        console.log(err)
+        return res.status(400).json(err);
+    }
+}
+
 const validateFloorCreation = (req, res, next) =>{
     try {
         //image is sent as a based64 String
@@ -96,5 +112,65 @@ const addOfficeToRequest =  async (req, res, next) =>{
     }
 }
 
+const addFloorToReq = async (req, res, next) =>{
+    try {
 
-module.exports = { validateOfficeCreation, validateFloorCreation, addOfficeToRequest, addDeskToReq, isDeskAssignable, removeDeskFromUser  }
+        if(!req.params.floorID)
+            return res.status(400).json({msg: "missing floor Id from request"});
+        const floor = await Floor.findById(req.params.floorID);
+        if(!floor)
+            return res.status(400).json({msg: "floor was not found in database"});
+        req.floor = floor;
+        next();
+        
+    } catch (errr) {
+        console.log(err);
+        return res.status(400).json(err);
+    }
+}
+
+const validateBookReq = async (req, res, next) =>{
+    try {
+
+        const { date } = req.body;
+        if(!date)
+            return res.status(400).json({msg: "missing or invalid date"});
+        let d1 = new Date();
+        let d2 = new Date(date);
+
+        console.log(d1);
+        console.log(d2);
+
+        if(getHourDifference(d1, d2) < 24)
+            return res.status(400).json({msg: "booking must be done with atleast a full day in advance"});
+        const bookings =  await Booking.find({desk: req.desk._id});
+        if(!bookings)
+            next();
+        else
+        {
+           for(let i = 0; i < bookings.length; i+=1)
+           {
+               d1 = moment(bookings[0].Date);
+               if(d1.isSame(d2, "day"))
+                    return res.status(400).json({msg: "desk is already booked for this day"});
+           }
+           next();
+        }
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err)
+    }
+
+}
+
+function getHourDifference (d1, d2) {
+
+    const diffInMilliseconds = d2 - d1;
+    const diffInHours = diffInMilliseconds / 1000 / 60 / 60;
+    console.log(diffInHours);
+    return diffInHours;
+
+}
+
+
+module.exports = { validateOfficeCreation, validateFloorCreation, addOfficeToRequest, addDeskToReq, isDeskAssignable, removeDeskFromUser, isDeskBookable, validateBookReq, addFloorToReq  }

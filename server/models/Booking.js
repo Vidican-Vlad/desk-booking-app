@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
 var BookingSchema = new mongoose.Schema({
-	desk: {  type: Schema.Types.ObjectId, ref: "Desk"},
-    Owner: {  type: Schema.Types.ObjectId, ref: "User"},
-    StartDate: { type: Date},
-    EndDate: { type: Date}
+	desk: {  type: mongoose.Schema.Types.ObjectId, ref: "Desk"},
+    Owner: {  type: mongoose.Schema.Types.ObjectId, ref: "User"},
+    Date: { type: Date},
 });
 
 module.exports = mongoose.model("Booking", BookingSchema);
