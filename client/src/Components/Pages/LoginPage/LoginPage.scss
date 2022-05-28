@@ -1,8 +1,9 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
+@use "../../../Styles/values";
 .login-page-container {
-	width: 88%;
-	margin-left: 12%;
+	width: values.$pageWidth;
+	margin-left: values.$pageMargin;
 }
 @media (max-width: 1080px) {
 	.login-page-container {

@@ -1,8 +1,9 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
+@use "../../../Styles/values";
 .dashboard-page-container {
-	width: 88%;
-	margin-left: 12%;
+	width: values.$pageWidth;
+	margin-left: values.$pageMargin;
 	&--title {
 		color: white;
 		font-size: 3rem;

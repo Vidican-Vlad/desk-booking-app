@@ -1,11 +1,12 @@
 @use "../../../Styles/default";
 @use "../../../Styles/colors";
+@use "../../../Styles/values";
 
 .navbar-container {
 	position: fixed;
 	display: flex;
 	flex-direction: column;
-	width: 12%;
+	width: values.$navBarWidth;
 	height: 100vh;
 	min-height: 100%;
 	background-color: colors.$containerColor;
