@@ -36,3 +36,25 @@ export const getFloors = (officeId) => {
 		}
 	});
 };
+
+export const createFloor = (officeId, data) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const requestHeader = {
+				headers: {
+					authorization: `Bearer ${getToken()}`,
+					"Content-type": "application/json",
+				},
+			};
+			const res = await axiosInstance.post(
+				`/office/${officeId}/floor`,
+				data,
+				requestHeader
+			);
+			resolve(res.data);
+		} catch (error) {
+			console.log(error);
+			reject(error);
+		}
+	});
+};

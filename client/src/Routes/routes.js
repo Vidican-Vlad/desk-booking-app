@@ -9,6 +9,7 @@ import ProfilePage from "../Components/Pages/ProfilePage/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 import CreateAccountsPage from "../Components/Pages/CreateAccountPage/CreateAccountsPage";
 import PageNotFound from "../Components/Pages/PageNotFound/PageNotFound";
+import CreateFloorPage from "../Components/Pages/CreateFloorPage/CreateFloorPage";
 
 const WebRoutes = () => {
 	const componentClass = "web-routes-container";
@@ -34,6 +35,14 @@ const WebRoutes = () => {
 								element={
 									<AdminRoute>
 										<DashBoardPage />
+									</AdminRoute>
+								}
+							/>
+							<Route
+								path="/dashboard/office/:officeId/new-floor"
+								element={
+									<AdminRoute>
+										<CreateFloorPage />
 									</AdminRoute>
 								}
 							/>

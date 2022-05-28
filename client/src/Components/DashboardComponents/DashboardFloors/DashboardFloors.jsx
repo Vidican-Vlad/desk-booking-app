@@ -43,7 +43,7 @@ const DashboardFloors = () => {
 		<div className={componentClass}>
 			<div className={headerClass}>
 				<h1>{office && office.Name}</h1>
-				<Link to={`/dashboad/office/${office._id}/new-floor`}>
+				<Link to={`/dashboard/office/${office._id}/new-floor`}>
 					Add new Floor
 				</Link>
 			</div>
