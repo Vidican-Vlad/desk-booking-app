@@ -13,7 +13,7 @@ import {
 	faCircleInfo,
 	faChartLine,
 	faUserPlus,
-	faBuildingCircleCheck
+	faBuildingCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../../../Redux/Features/authenticationSlice";
 import { deleteCookies } from "../../../Utils/UtilFunctions";
@@ -56,20 +56,20 @@ const Navbar = () => {
 						</Link>
 					</li>
 					<li className={menuItemClass}>
-						<Link to="/">
+						<Link to="/all-locations">
 							<FontAwesomeIcon icon={faLocation} />
 							Locations
 						</Link>
 					</li>
 					<li className={menuItemClass}>
-						<Link to="/">
+						<Link to="/about">
 							<FontAwesomeIcon icon={faCircleInfo} />
 							About
 						</Link>
 					</li>
 				</ul>
 			</div>
-			{ isAdmin && (
+			{isAdmin && (
 				<>
 					<div className={navbarDividerClass}></div>
 					<span className={menuHeaderClass}>Admin</span>
@@ -102,26 +102,24 @@ const Navbar = () => {
 				</>
 			)}
 			{isConnected ? (
-			<>			
-				<div className={navbarDividerClass}></div>
-				<span className={menuHeaderClass}>Welcome</span>
-				<div className={navbarUserClass}>
-					<div className={navbarUserAvatarClass}>
-
+				<>
+					<div className={navbarDividerClass}></div>
+					<span className={menuHeaderClass}>Welcome</span>
+					<div className={navbarUserClass}>
+						<div className={navbarUserAvatarClass}></div>
+						<div className={navbarUserInfoClass}>
+							<span className={navbarUserInfoName}>
+								{userProfile?.firstName} {userProfile?.lastName}
+							</span>
+							<span className={navbarUserInfoEmail}>
+								{userProfile?.email}
+							</span>
+							<span className={navbarUserInfoRole}>
+								{isAdmin ? "Admin" : "User"}
+							</span>
+						</div>
 					</div>
-					<div className={navbarUserInfoClass}>
-						<span className={navbarUserInfoName}>
-							{userProfile?.firstName} {userProfile?.lastName}
-						</span>
-						<span className={navbarUserInfoEmail}>
-							{userProfile?.email}
-						</span>
-						<span className={navbarUserInfoRole}>
-							{ isAdmin ? "Admin" : "User" }
-						</span>
-					</div>
-				</div>
-			</>
+				</>
 			) : null}
 			<div className={navbarDividerClass}></div>
 			<div className={menuClass}>
@@ -134,7 +132,9 @@ const Navbar = () => {
 									dispatch(logout());
 								}}
 							>
-								<FontAwesomeIcon icon={faArrowRightFromBracket} />
+								<FontAwesomeIcon
+									icon={faArrowRightFromBracket}
+								/>
 								Logout
 							</button>
 						</li>

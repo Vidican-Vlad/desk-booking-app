@@ -2,7 +2,7 @@
 @use "../../../Styles/colors";
 @use "../../../Styles/values";
 
-.create-account-form-container {
+.create-office-form-container {
 	position: relative;
 	color: colors.$textColor;
 	width: 80%;
@@ -66,10 +66,7 @@
 	}
 }
 @media (max-width: 600px) {
-	.create-account-form-container {
-		&__img {
-			display: none;
-		}
+	.create-office-form-container {
 		&__form-side {
 			width: 100%;
 		}

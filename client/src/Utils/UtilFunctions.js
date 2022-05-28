@@ -40,4 +40,5 @@ export const cookieTokenExists = () => {
 export const deleteCookies = () => {
 	cookies.remove(TOKEN);
 	cookies.remove(IS_ADMIN);
+	window.location.reload();
 };

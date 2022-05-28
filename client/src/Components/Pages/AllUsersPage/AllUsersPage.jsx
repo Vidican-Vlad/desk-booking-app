@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import "./AllUserPage.scss";
 
 const AllUsersPage = () => {
-  return (
-    <div>AllUsersPage</div>
-  )
-}
+	const componentClass = "all-users-page-container";
 
-export default AllUsersPage
+	return <div className={componentClass}></div>;
+};
+
+export default AllUsersPage;

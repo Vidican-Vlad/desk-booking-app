@@ -2,19 +2,20 @@
 @use "../../../Styles/colors";
 @use "../../../Styles/values";
 
-.login-page-container {
+.create-offices-page-container {
 	width: values.$pageWidth;
 	margin-left: values.$pageMargin;
 }
+
 @media (max-width: 1080px) {
-	.login-page-container {
+	.create-offices-page-container {
 		width: 80%;
 		margin-left: 20%;
 	}
 }
 
 @media (max-width: 650px) {
-	.login-page-container {
+	.create-offices-page-container {
 		width: 75%;
 		margin-left: 25%;
 	}

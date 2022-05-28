@@ -1,6 +1,28 @@
 import { getToken } from "../../Utils/UtilFunctions";
 import axiosInstance from "../Axios/AxiosInstance";
 
+export const createOffice = (office) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const requestHeader = {
+				headers: {
+					authorization: `Bearer ${getToken()}`,
+					"Content-type": "application/json",
+				},
+			};
+			const res = await axiosInstance.post(
+				"/office",
+				office,
+				requestHeader,
+			);
+			resolve(res.data);
+		} catch (error) {
+			console.log(error);
+			reject(error);
+		}
+	});
+};
+
 export const getOffice = () => {
 	return new Promise(async (resolve, reject) => {
 		try {
@@ -28,7 +50,10 @@ export const getFloors = (officeId) => {
 					"Content-type": "application/json",
 				},
 			};
-			const res = await axiosInstance.get(`/office/${officeId}`, requestHeader);
+			const res = await axiosInstance.get(
+				`/office/${officeId}`,
+				requestHeader,
+			);
 			resolve(res.data);
 		} catch (error) {
 			console.log(error);

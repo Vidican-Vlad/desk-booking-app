@@ -9,6 +9,8 @@ import ProfilePage from "../Components/Pages/ProfilePage/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 import CreateAccountsPage from "../Components/Pages/CreateAccountPage/CreateAccountsPage";
 import PageNotFound from "../Components/Pages/PageNotFound/PageNotFound";
+import AllLocationPage from "../Components/Pages/AllLocationsPage/AllLocationPage";
+import CreateOfficePage from "../Components/Pages/CreateOfficePage/CreateOfficePage";
 
 const WebRoutes = () => {
 	const componentClass = "web-routes-container";
@@ -46,10 +48,26 @@ const WebRoutes = () => {
 								}
 							/>
 							<Route
+								path="/create-office"
+								element={
+									<AdminRoute>
+										<CreateOfficePage />
+									</AdminRoute>
+								}
+							/>
+							<Route
 								path="/profile"
 								element={
 									<PrivateRoute>
 										<ProfilePage />
+									</PrivateRoute>
+								}
+							/>
+							<Route
+								path="/all-locations"
+								element={
+									<PrivateRoute>
+										<AllLocationPage />
 									</PrivateRoute>
 								}
 							/>
