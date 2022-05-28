@@ -2,7 +2,7 @@ const Office = require("../models/Office");
 const Floor = require("../models/Floor");
 const Desk = require("../models/Desk");
 const isStringInvalid = require("../middleware/isStringInvalid");
-const  mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 
 
@@ -22,6 +22,75 @@ const createOffice = async (req, res) =>{
     }
 }
 
+const assignDesk = async (req, res) => {
+    try {
+        
+        const user = req.user;
+        const desk = req.desk;
+        if(user.desk == desk._id && desk.Owner == user._id)
+            return res.status(400).json({msg: "desk was already assigned to this user"});
+        user.desk = desk._id;
+        desk.Owner = user._id;
+        await Promise.all( [user.save(), desk.save()]);
+        return res.status(200).json({msg: "desk was now assigned"});
+
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err);
+    }
+}
+
+const unassignDesk = async (req, res) => {
+    try{
+
+        const desk = req.desk;
+        if(desk.Owner == null)
+           return res.status(400).json({msg: "desk was already empty"});
+        desk.Owner = null;
+        await desk.save();
+        return res.status(200).json({msg: "assignemnet removed, desk is now free"});
+
+    } catch (err){
+        console.log(err);
+        return res.status(400).json(err);
+    }
+}
+const makeDeskAssignable = async (req, res) => {
+    try {
+
+        const desk = req.desk;
+        if(!desk)
+            return res.status(400).json({msg: "account was already assignable"})
+        desk.Bookable = false;
+
+        //to be implemented, remove all bookins for that desk
+        await desk.save();
+        return res.status(200).json({msg: "desk is now assignable!"});
+
+        
+    } catch (err) {
+        console.log(err)
+        res.status(400).json(err);
+    }
+}
+
+const makeDeskBookable = async (req, res) => {
+    try{
+        
+        const desk = req.desk;
+        if(desk)
+            return res.status(400).json({msg: "desk was already bookable"});
+        
+        desk.Bookable = true;
+        await desk.save();
+        return res.status(200).json({msg: "desk is now bookable!"});
+
+    } catch(err) {
+        console.log(err)
+        res.status(400).json(err);
+    }
+
+}
 const getAllOffices = async (req, res) => {
     try{
 
@@ -113,4 +182,4 @@ function validatePoint(point)
 }
 
 
-module.exports = { createOffice, createFloor, getAllOffices, getSpecificOffice  }
+module.exports = { createOffice, createFloor, getAllOffices, getSpecificOffice, assignDesk, makeDeskBookable, makeDeskAssignable, unassignDesk  }

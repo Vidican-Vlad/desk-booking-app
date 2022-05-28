@@ -11,6 +11,6 @@ const {
 router.get("/users", auth, checkIfAdmin, controller.getAllUsers);
 
 // GET USER BY ID
-router.get("/getUser", auth, controller.getUserById);
+router.get("/getUser", auth, controller.getOwnAccount);
 
 module.exports = router;
