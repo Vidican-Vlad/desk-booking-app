@@ -13,7 +13,11 @@ const registerUser = async (req, res) => {
 			admin: req.body.admin,
 			password: await hashPass(req.body.password.trim()),
 		});
-		await nodemailer.sendWelcomeEmail(user.email, user.firstName,req.body.password.trim());
+		await nodemailer.sendWelcomeEmail(
+			user.email,
+			user.firstName,
+			req.body.password.trim()
+		);
 
 		return res.status(200).json(user);
 	} catch (err) {
@@ -22,44 +26,50 @@ const registerUser = async (req, res) => {
 	}
 };
 
-const generatePassResetKey = async (req, res) =>{
+const generatePassResetKey = async (req, res) => {
 	try {
 		const key = generateResetToken();
 		const user = req.auth;
 		user.resetKey = key;
 		const date = new Date();
-		cron.schedule(dateTimeToCronExp(new Date(date.getTime() + 3*60000)), async () => {
-			await deleteResetKey(user);
-		})
+		cron.schedule(
+			dateTimeToCronExp(new Date(date.getTime() + 3 * 60000)),
+			async () => {
+				await deleteResetKey(user);
+			}
+		);
 
-		await Promise.all([ nodemailer.sendResetToken(user.email, user.firstName, key), user.save() ]);
-		return res.status(200).json({msg: "reset token was genereated and sent to the user"});
+		await Promise.all([
+			nodemailer.sendResetToken(user.email, user.firstName, key),
+			user.save(),
+		]);
+		return res
+			.status(200)
+			.json({ msg: "reset token was genereated and sent to the user" });
 	} catch (err) {
 		console.log(err);
 		return res.status(400).json(err);
 	}
-}
+};
 
-async function deleteResetKey(user)
-{
+async function deleteResetKey(user) {
 	user.resetKey = null;
 	await user.save();
 }
 
-const changePassword = async (req, res) =>{
+const changePassword = async (req, res) => {
 	try {
 		const user = req.auth;
 		user.initialPass = false;
-		user.password =  await hashPass(req.body.password);
+		user.password = await hashPass(req.body.password);
 		await user.save();
 		console.log(user);
-		return res.status(200).json({msg: "password was changed"})
-		
+		return res.status(200).json({ msg: "password was changed" });
 	} catch (err) {
 		console.log(err);
 		return res.status(400).json(err);
 	}
-}
+};
 
 const registerAdmin = async (req, res) => {
 	try {
@@ -69,7 +79,7 @@ const registerAdmin = async (req, res) => {
 			lastName: req.body.lastName.trim(),
 			admin: true,
 			password: await hashPass(req.body.password.trim()),
-			initialPassword: false
+			initialPassword: false,
 		});
 
 		const token = generateToken(user._id);
@@ -80,12 +90,11 @@ const registerAdmin = async (req, res) => {
 	}
 };
 
-
 const loginUser = async (req, res) => {
 	try {
 		//console.log(req.user);
 		const token = generateToken(req.user._id, req.user.initialPass);
-		
+
 		res.status(200).json({ token: token, isAdmin: req.user.admin });
 	} catch (err) {
 		res.status(500).json(err);
@@ -97,33 +106,31 @@ async function hashPass(pass) {
 	return hashedPass;
 }
 function generateToken(id, initialPass) {
-	const token = jwt.sign({ _id: id, initialPass }, process.env.AUTH_TOKEN_SECRET);
+	const token = jwt.sign(
+		{ _id: id, initialPass },
+		process.env.AUTH_TOKEN_SECRET
+	);
 	return token;
 }
 function generateResetToken() {
-	return Math.random().toString(36).substr(2, 5)
+	return Math.random().toString(36).substr(2, 5);
 }
 
-function dateTimeToCronExp(date){
-    if(date instanceof Date)
-    {
-        const minutes = date.getMinutes();
-        const hours = date.getHours();
-        const days = date.getDate();
-        const months = date.getMonth() + 1;
-        const dayOfWeek = date.getDay();
+function dateTimeToCronExp(date) {
+	if (date instanceof Date) {
+		const minutes = date.getMinutes();
+		const hours = date.getHours();
+		const days = date.getDate();
+		const months = date.getMonth() + 1;
+		const dayOfWeek = date.getDay();
 
-        //console.log(`${minutes} ${hours} ${days} ${months} ${dayOfWeek}`);
-    
-        return `${minutes} ${hours} ${days} ${months} ${dayOfWeek}`;
-    }
-    else
-    {
-        console.log("not a date");
+		//console.log(`${minutes} ${hours} ${days} ${months} ${dayOfWeek}`);
 
-    }
-    return null;
-
+		return `${minutes} ${hours} ${days} ${months} ${dayOfWeek}`;
+	} else {
+		console.log("not a date");
+	}
+	return null;
 }
 
 module.exports = {
@@ -131,5 +138,5 @@ module.exports = {
 	registerAdmin,
 	loginUser,
 	generatePassResetKey,
-	changePassword
+	changePassword,
 };

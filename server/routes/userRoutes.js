@@ -13,7 +13,7 @@ router.get(
 	auth,
 	addOwnAccToReq,
 	checkIfAdmin,
-	controller.getAllUsers,
+	controller.getAllUsers
 );
 
 // GET USER BY ID

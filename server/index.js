@@ -14,7 +14,7 @@ const listener = app.listen(process.env.API_PORT, function () {
 
 const authAPI = require("./routes/authRoutes");
 const userAPI = require("./routes/userRoutes");
-const officeAPI = require("./routes/officeRoutes")
+const officeAPI = require("./routes/officeRoutes");
 
 app.use(bodyParser.json());
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use(
 	cors({
 		origin: "http://localhost:3000",
 		credentials: true,
-	}),
+	})
 );
 app.use(cookieParser());
 

@@ -17,9 +17,7 @@ const addOwnAccToReq = async (req, res, next) => {
 const addUsertoReq = async (req, res, next) => {
 	try {
 		if (!req.body.user)
-			return res
-				.status(400)
-				.json({ msg: "missing user id from request" });
+			return res.status(400).json({ msg: "missing user id from request" });
 
 		const user = await User.findById(req.body.user);
 		if (!user) return res.status(400).json({ msg: "User was not found" });
@@ -47,8 +45,7 @@ const checkIFEmailAlreadyUsed = async (req, res, next) => {
 };
 const checkIfAdmin = async (req, res, next) => {
 	try {
-		if (!req.auth.admin)
-			return res.status(400).json({ msg: "missing rights" });
+		if (!req.auth.admin) return res.status(400).json({ msg: "missing rights" });
 		next();
 	} catch (err) {
 		console.log(err);
@@ -137,9 +134,7 @@ const validatePasswordChange = async (req, res, next) => {
 		if (isStringInvalid(password))
 			return res.status(400).json({ msg: "missing or invalid password" });
 		if (token != req.auth.resetKey)
-			return res
-				.status(400)
-				.json({ msg: "the reset token was incorrect" });
+			return res.status(400).json({ msg: "the reset token was incorrect" });
 		next();
 	} catch (err) {
 		console.log(err);
