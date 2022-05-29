@@ -31,8 +31,6 @@ const AllUsers = () => {
 	const { users } = useSelector((state) => state.usersState);
 	const componentClass = "all-users-container";
 
-	console.log(users);
-
 	return (
 		<div className={componentClass}>
 			<h2>All Users:</h2>

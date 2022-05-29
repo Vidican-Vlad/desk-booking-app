@@ -3,14 +3,13 @@
 @use "../../../Styles/values";
 
 .all-users-container {
-	margin: 2rem 4rem;
-	min-height: 80%;
-	background: colors.$containerColor;
+	position: relative;
 	color: colors.$textColor;
-	padding: 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 5rem;
+	width: 80%;
+	margin: 10rem auto;
+	//display: flex;
+	background: colors.$containerColor;
+	height: 80vh;
 	border-radius: 5px;
 	box-shadow: values.$boxShadow;
 }

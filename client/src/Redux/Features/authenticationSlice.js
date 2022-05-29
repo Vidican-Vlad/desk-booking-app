@@ -24,6 +24,19 @@ export const authenticationSlice = createSlice({
 			state.loading = false;
 			state.error = action.payload;
 		},
+
+		changePasswordInit: (state) => {
+			state.loading = true;
+		},
+		changePasswordSuccess: (state) => {
+			state.loading = false;
+			state.error = "";
+		},
+		changePasswordFail: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
+
 		loginInit: (state) => {
 			state.loading = true;
 		},
@@ -38,6 +51,7 @@ export const authenticationSlice = createSlice({
 			state.isConnected = false;
 			state.error = action.payload;
 		},
+
 		logout: (state) => {
 			state.isConnected = false;
 			state.isAdmin = false;
@@ -54,6 +68,9 @@ export const {
 	loginSuccess,
 	loginFail,
 	logout,
+	changePasswordInit,
+	changePasswordSuccess,
+	changePasswordFail,
 } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;

@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 import { getFloor, bookDesk } from "../../Redux/API/office";
 import ImageMapper from "react-image-mapper";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {
 	loadFloorInit,
 	loadFloorFail,
@@ -146,6 +148,10 @@ const ShowFloor = () => {
 						}}
 					>
 						<Form onSubmit={submitHandler}>
+							<DatePicker
+								selected={startDate}
+								onChange={(date) => setStartDate(date)}
+							/>
 							<button type="submit">Book</button>
 						</Form>
 					</Formik>

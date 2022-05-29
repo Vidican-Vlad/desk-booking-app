@@ -62,6 +62,27 @@ export const getFloors = (officeId) => {
 	});
 };
 
+export const getFloor = (floorId) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const requestHeader = {
+				headers: {
+					authorization: `Bearer ${getToken()}`,
+					"Content-type": "application/json",
+				},
+			};
+			const res = await axiosInstance.get(
+				`/office/floor/${floorId}`,
+				requestHeader,
+			);
+			resolve(res.data);
+		} catch (error) {
+			console.log(error);
+			reject(error);
+		}
+	});
+};
+
 export const createFloor = (officeId, data) => {
 	return new Promise(async (resolve, reject) => {
 		try {
@@ -74,7 +95,29 @@ export const createFloor = (officeId, data) => {
 			const res = await axiosInstance.post(
 				`/office/${officeId}/floor`,
 				data,
-				requestHeader
+				requestHeader,
+			);
+			resolve(res.data);
+		} catch (error) {
+			console.log(error);
+			reject(error);
+		}
+	});
+};
+
+export const bookDesk = (data) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const requestHeader = {
+				headers: {
+					authorization: `Bearer ${getToken()}`,
+					"Content-type": "application/json",
+				},
+			};
+			const res = await axiosInstance.post(
+				`/office/desk/${data._id}/book`,
+				data,
+				requestHeader,
 			);
 			resolve(res.data);
 		} catch (error) {

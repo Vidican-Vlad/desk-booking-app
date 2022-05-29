@@ -5,6 +5,8 @@ import officesReducer from "./Features/officesSlice";
 import officeDetailsReducer from "./Features/officeDetailsSlice";
 import userProfileReducer from "./Features/profileSlice";
 import usersReducer from "./Features/usersSlice";
+import floorReducer from "./Features/floorSlice";
+import deskReducer from "./Features/deskSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -13,5 +15,7 @@ export const store = configureStore({
 		profileSlice: userProfileReducer,
 		officeDetails: officeDetailsReducer,
 		usersState: usersReducer,
+		floorState: floorReducer,
+		deskSlice: deskReducer,
 	},
 });
