@@ -1,9 +1,14 @@
 import "./HomePage.scss";
 import React from "react";
+import { Home } from "../../UserComponents/Home/Home";
 
 const HomePage = () => {
-	const componentClass = "landing-page-container";
-	return <div className={componentClass}>HomePage</div>;
+	const componentClass = "home-page-container";
+	return (
+		<div className={componentClass}>
+			<Home />
+		</div>
+	);
 };
 
 export default HomePage;

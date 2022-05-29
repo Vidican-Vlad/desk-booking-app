@@ -11,8 +11,13 @@ import {
 	changePasswordInit,
 	changePasswordFail,
 	changePasswordSuccess,
+	registerFail,
 } from "../../../Redux/Features/authenticationSlice";
-import { userLogin } from "../../../Redux/API/authentication";
+import {
+	generatePassResetKey,
+	resetPassword,
+	userLogin,
+} from "../../../Redux/API/authentication";
 const initialValues = {
 	email: "",
 	password: "",
@@ -23,40 +28,44 @@ const ResetPasswordForm = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		if (isConnected) navigate("/");
-	}, [isConnected, navigate]);
-
 	const validate = Yup.object({
-		email: Yup.string()
-			.email("Enter a valid email!")
-			.required("Email required!"),
+		key: Yup.string().required("Key required!"),
 		password: Yup.string().required("Password required!"),
+		confirmPassword: Yup.string()
+			.oneOf([Yup.ref("password"), null], "Password need to match!")
+			.required("Re-Password required!"),
 	});
+
+	const submitKeyHandler = async () => {
+		try {
+			const response = await generatePassResetKey();
+		} catch (error) {
+			dispatch(changePasswordFail(error.message));
+		}
+	};
 
 	const submitHandler = async (values) => {
 		dispatch(changePasswordInit());
 
 		try {
 			const loginValues = {
-				email: values.email,
+				token: values.key,
 				password: values.password,
 			};
 
-			const loginResponse = await userLogin(loginValues);
+			const loginResponse = await resetPassword(loginValues);
 			if (!loginResponse.token) {
-				dispatch(loginFail("Can`t login!"));
+				dispatch(changePasswordFail("Can`t change password!"));
 			}
 			console.log(loginResponse);
-			dispatch(loginSuccess(loginResponse.isAdmin));
-
+			dispatch(changePasswordSuccess(loginResponse));
 			navigate("/");
 		} catch (error) {
-			dispatch(loginFail(error.message));
+			dispatch(changePasswordFail(error.message));
 		}
 	};
 
-	const componentClass = "login-form-container";
+	const componentClass = "reset-password-form-container";
 	const imgContainerClass = `${componentClass}__img`;
 	const formSideClass = `${componentClass}__form-side`;
 	const formContainerClass = `${formSideClass}__form-container`;
@@ -75,6 +84,7 @@ const ResetPasswordForm = () => {
 				</div>
 				<div className={formSideClass}>
 					<h1>Reset Password</h1>
+					<button onClick={submitKeyHandler}>Generate Key</button>
 					<Form className={formContainerClass}>
 						<TextInput
 							type="text"
@@ -83,7 +93,6 @@ const ResetPasswordForm = () => {
 							placeholderText="Key"
 							name="key"
 						/>
-
 						<TextInput
 							type="password"
 							id="password"

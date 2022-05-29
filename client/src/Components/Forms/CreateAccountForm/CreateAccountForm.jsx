@@ -28,12 +28,7 @@ const CreateAccountForm = () => {
 		email: Yup.string()
 			.email("Enter a valid email!")
 			.required("Email required!"),
-		password: Yup.string()
-			.required("Password required!")
-			.matches(
-				/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-				"min 6 len = 0-9,a-z,A-Z and special",
-			),
+		password: Yup.string().required("Password required!"),
 		rePassword: Yup.string()
 			.oneOf([Yup.ref("password"), null], "Password need to match!")
 			.required("Re-Password required!"),

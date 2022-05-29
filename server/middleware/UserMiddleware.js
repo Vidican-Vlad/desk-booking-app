@@ -58,11 +58,9 @@ const checkIfAdmin = async (req, res, next) => {
 const checkIfInitialPass = async (req, res, next) => {
 	try {
 		if (req.auth.initialPass)
-			return res
-				.status(400)
-				.json({
-					msg: "account creation process not finished, initial password must be changed",
-				});
+			return res.status(400).json({
+				msg: "account creation process not finished, initial password must be changed",
+			});
 		next();
 	} catch (err) {
 		console.log(err);
@@ -134,6 +132,8 @@ const validateLogin = async (req, res, next) => {
 const validatePasswordChange = async (req, res, next) => {
 	try {
 		const { password, token } = req.body;
+		console.log(req.auth.resetKey);
+		console.log(token);
 		if (isStringInvalid(password))
 			return res.status(400).json({ msg: "missing or invalid password" });
 		if (token != req.auth.resetKey)

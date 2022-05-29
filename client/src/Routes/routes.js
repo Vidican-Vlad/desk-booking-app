@@ -14,6 +14,7 @@ import CreateOfficePage from "../Components/Pages/CreateOfficePage/CreateOfficeP
 import CreateFloorPage from "../Components/Pages/CreateFloorPage/CreateFloorPage";
 import ShowFloorPage from "../Components/Pages/ShowFloorPage/ShowFloorPage";
 import AllUsersPage from "../Components/Pages/AllUsersPage/AllUsersPage";
+import ResetPasswordPage from "../Components/Pages/ResetPasswordPage/ResetPasswordPage";
 
 const WebRoutes = () => {
 	const componentClass = "web-routes-container";
@@ -95,6 +96,14 @@ const WebRoutes = () => {
 								element={
 									<PrivateRoute>
 										<AllUsersPage />
+									</PrivateRoute>
+								}
+							/>
+							<Route
+								path="/reset-password"
+								element={
+									<PrivateRoute>
+										<ResetPasswordPage />
 									</PrivateRoute>
 								}
 							/>

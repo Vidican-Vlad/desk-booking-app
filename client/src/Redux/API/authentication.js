@@ -32,7 +32,51 @@ export const createUserAccount = (data) => {
 			const res = await axiosInstance.post(
 				"/auth/register",
 				data,
-				requestHeader
+				requestHeader,
+			);
+			resolve(res.data);
+		} catch (error) {
+			console.log(error);
+			reject(error);
+		}
+	});
+};
+
+export const resetPassword = (data) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const requestHeader = {
+				headers: {
+					authorization: `Bearer ${getToken()}`,
+					"Content-type": "application/json",
+				},
+			};
+			const res = await axiosInstance.put(
+				"/auth/changePassword",
+				data,
+				requestHeader,
+			);
+			resolve(res.data);
+		} catch (error) {
+			console.log(error);
+			reject(error);
+		}
+	});
+};
+
+export const generatePassResetKey = () => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const requestHeader = {
+				headers: {
+					authorization: `Bearer ${getToken()}`,
+					"Content-type": "application/json",
+				},
+			};
+			const res = await axiosInstance.put(
+				"/auth/initPassReset",
+				{},
+				requestHeader,
 			);
 			resolve(res.data);
 		} catch (error) {
