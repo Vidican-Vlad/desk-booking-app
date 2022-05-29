@@ -1,7 +1,7 @@
 import "./ShowFloor.scss";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Modal from "react-modal";
 import { getFloor, bookDesk } from "../../Redux/API/office";
 import ImageMapper from "react-image-mapper";
@@ -36,8 +36,8 @@ const ShowFloor = () => {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [desk, setDesk] = useState({});
 	const [deskId, setDeskId] = useState();
-	const [startDate, setStartDate] = useState(new Date());
-
+	const [startDate, setStartDate] = useState();
+	const navigate = useNavigate();
 	useEffect(() => {
 		const loadData = async () => {
 			try {
@@ -57,7 +57,7 @@ const ShowFloor = () => {
 			}
 		};
 		loadData();
-	}, [dispatch, floorId]);
+	}, [dispatch, floorId, officeId]);
 
 	const { floor } = useSelector((state) => state.floorState);
 	const areas = floor.areas
@@ -75,7 +75,6 @@ const ShowFloor = () => {
 
 	const submitHandler = async () => {
 		dispatch(bookInit());
-		console.log("123");
 		try {
 			const bookValues = {
 				_id: deskId,
@@ -83,15 +82,19 @@ const ShowFloor = () => {
 			};
 
 			const res = await bookDesk(bookValues);
+			console.log(res);
 			if (!res) {
 				dispatch(bookFail("Can`t book desk!"));
 			} else {
 				dispatch(bookSuccess());
-				//navigate("/");
+				navigate("/");
 			}
 		} catch (error) {
 			dispatch(bookFail(error.message));
 		}
+	};
+	const dateHandler = (e) => {
+		setStartDate(e.target.value);
 	};
 
 	function onClick(e) {
@@ -142,10 +145,11 @@ const ShowFloor = () => {
 							date: startDate,
 						}}
 						onSubmit={(values) => {
-							submitHandler(values);
+							submitHandler();
 						}}
 					>
-						<Form onSubmit={submitHandler}>
+						<Form>
+							<input onChange={dateHandler} type="date" name="date" id="date" />
 							<button type="submit">Book</button>
 						</Form>
 					</Formik>

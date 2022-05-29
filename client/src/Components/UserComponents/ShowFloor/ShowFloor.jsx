@@ -59,7 +59,7 @@ const ShowFloor = () => {
 			}
 		};
 		loadData();
-	}, [dispatch, floorId]);
+	}, [dispatch, floorId, officeId]);
 
 	const { floor } = useSelector((state) => state.floorState);
 	const areas = floor.areas
@@ -95,7 +95,9 @@ const ShowFloor = () => {
 			dispatch(bookFail(error.message));
 		}
 	};
-
+	const dateHandler = (e) => {
+		setStartDate(e.target.value);
+	};
 	function onClick(e) {
 		if (e.bookable) {
 			setDeskId(e.id);
@@ -144,14 +146,11 @@ const ShowFloor = () => {
 							date: startDate,
 						}}
 						onSubmit={(values) => {
-							submitHandler(values);
+							submitHandler();
 						}}
 					>
-						<Form onSubmit={submitHandler}>
-							<DatePicker
-								selected={startDate}
-								onChange={(date) => setStartDate(date)}
-							/>
+						<Form>
+							<input onChange={dateHandler} type="date" name="date" id="date" />
 							<button type="submit">Book</button>
 						</Form>
 					</Formik>
