@@ -42,7 +42,7 @@ const DashboardMain = () => {
 		<div className={componentClass}>
 			<div className={headerClass}>
 				<h2>Offices:</h2>
-				<Link to="/dashboard/addOffice">Add new Office</Link>
+				<Link to="/create-office">Add new Office</Link>
 			</div>
 			<div className={officesContainerClass}>
 				{offices &&
