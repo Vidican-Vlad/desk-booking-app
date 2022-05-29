@@ -55,7 +55,7 @@ const Navbar = () => {
 							Home
 						</Link>
 					</li>
-					<li className={menuItemClass}>
+					{/* <li className={menuItemClass}>
 						<Link to="/all-locations">
 							<FontAwesomeIcon icon={faLocation} />
 							Locations
@@ -66,7 +66,7 @@ const Navbar = () => {
 							<FontAwesomeIcon icon={faCircleInfo} />
 							About
 						</Link>
-					</li>
+					</li> */}
 				</ul>
 			</div>
 			{isAdmin && (

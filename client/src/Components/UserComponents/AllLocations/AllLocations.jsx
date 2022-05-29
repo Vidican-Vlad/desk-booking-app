@@ -57,7 +57,7 @@ const AllLocations = () => {
 								<p className={officeAddressClass}>
 									<span>Address:</span> {item.Address}
 								</p>
-								<Link to={`/office/${item._id}`}>
+								<Link to={`/office/${item._id}/`}>
 									Show Floors
 								</Link>
 							</div>

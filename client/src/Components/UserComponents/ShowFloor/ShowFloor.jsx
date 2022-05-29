@@ -1,22 +1,20 @@
 import "./ShowFloor.scss";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Modal from "react-modal";
-import { getFloor, bookDesk } from "../../Redux/API/office";
+import { getFloor, bookDesk } from "../../../Redux/API/office";
 import ImageMapper from "react-image-mapper";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import {
 	loadFloorInit,
 	loadFloorFail,
 	loadFloorSuccess,
-} from "../../Redux/Features/floorSlice";
+} from "../../../Redux/Features/floorSlice";
 import {
 	bookInit,
 	bookFail,
 	bookSuccess,
-} from "../../Redux/Features/deskSlice";
+} from "../../../Redux/Features/deskSlice";
 import { Formik, Form } from "formik";
 
 const customStyles = {
@@ -38,8 +36,8 @@ const ShowFloor = () => {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [desk, setDesk] = useState({});
 	const [deskId, setDeskId] = useState();
-	const [startDate, setStartDate] = useState(new Date());
-
+	const [startDate, setStartDate] = useState();
+	const navigate = useNavigate();
 	useEffect(() => {
 		const loadData = async () => {
 			try {
@@ -77,7 +75,6 @@ const ShowFloor = () => {
 
 	const submitHandler = async () => {
 		dispatch(bookInit());
-		console.log("123");
 		try {
 			const bookValues = {
 				_id: deskId,
@@ -85,11 +82,12 @@ const ShowFloor = () => {
 			};
 
 			const res = await bookDesk(bookValues);
+			console.log(res);
 			if (!res) {
 				dispatch(bookFail("Can`t book desk!"));
 			} else {
 				dispatch(bookSuccess());
-				//navigate("/");
+				navigate("/");
 			}
 		} catch (error) {
 			dispatch(bookFail(error.message));
@@ -98,6 +96,7 @@ const ShowFloor = () => {
 	const dateHandler = (e) => {
 		setStartDate(e.target.value);
 	};
+
 	function onClick(e) {
 		if (e.bookable) {
 			setDeskId(e.id);
@@ -150,7 +149,12 @@ const ShowFloor = () => {
 						}}
 					>
 						<Form>
-							<input onChange={dateHandler} type="date" name="date" id="date" />
+							<input
+								onChange={dateHandler}
+								type="date"
+								name="date"
+								id="date"
+							/>
 							<button type="submit">Book</button>
 						</Form>
 					</Formik>

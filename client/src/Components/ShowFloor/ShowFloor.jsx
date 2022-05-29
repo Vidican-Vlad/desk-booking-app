@@ -149,7 +149,12 @@ const ShowFloor = () => {
 						}}
 					>
 						<Form>
-							<input onChange={dateHandler} type="date" name="date" id="date" />
+							<input
+								onChange={dateHandler}
+								type="date"
+								name="date"
+								id="date"
+							/>
 							<button type="submit">Book</button>
 						</Form>
 					</Formik>
