@@ -8,15 +8,7 @@ const PrivateRoute = ({ children }) => {
 
 	console.log(userProfile);
 
-	return getToken() ? (
-		userProfile.initialPass ? (
-			<Navigate to="/reset-password" />
-		) : (
-			children
-		)
-	) : (
-		<Navigate to="/login" />
-	);
+	return getToken() ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;
