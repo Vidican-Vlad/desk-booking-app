@@ -45,7 +45,7 @@ const CreateOfficeForm = () => {
 				dispatch(addOfficeFail("Can`t create office"));
 			} else {
 				dispatch(addOfficeSuccess());
-				navigate("/all-locations");
+				navigate("/dashboard");
 			}
 		} catch (error) {
 			dispatch(addOfficeFail(error.message));
