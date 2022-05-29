@@ -1,30 +1,28 @@
 import "./ResetPasswordForm.scss";
-import React, { useEffect } from "react";
+import React from "react";
 
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ForgotImg from "../../../Assets/Images/ForgotPasswordImage.svg";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import TextInput from "../TextInput/TextInput";
 import {
 	changePasswordInit,
 	changePasswordFail,
 	changePasswordSuccess,
-	registerFail,
 } from "../../../Redux/Features/authenticationSlice";
 import {
 	generatePassResetKey,
 	resetPassword,
-	userLogin,
 } from "../../../Redux/API/authentication";
 const initialValues = {
 	email: "",
 	password: "",
+	confirmPassword: "",
 };
 
 const ResetPasswordForm = () => {
-	const { isConnected } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -36,9 +34,10 @@ const ResetPasswordForm = () => {
 			.required("Re-Password required!"),
 	});
 
-	const submitKeyHandler = async () => {
+	const submitKeyHandler = async (e) => {
 		try {
-			const response = await generatePassResetKey();
+			e.preventDefault();
+			await generatePassResetKey();
 		} catch (error) {
 			dispatch(changePasswordFail(error.message));
 		}
@@ -84,7 +83,13 @@ const ResetPasswordForm = () => {
 				</div>
 				<div className={formSideClass}>
 					<h1>Reset Password</h1>
-					<button onClick={submitKeyHandler}>Generate Key</button>
+					<button
+						onClick={(e) => {
+							submitKeyHandler(e);
+						}}
+					>
+						Generate Key
+					</button>
 					<Form className={formContainerClass}>
 						<TextInput
 							type="text"

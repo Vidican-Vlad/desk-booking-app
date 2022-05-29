@@ -2,8 +2,8 @@
 @use "../../../Styles/colors";
 @use "../../../Styles/values";
 
-.login-page-container {
-    position: relative;
+.home-container {
+	position: relative;
 	color: colors.$textColor;
 	width: 80%;
 	margin: 10rem auto;
@@ -12,4 +12,18 @@
 	height: 80vh;
 	border-radius: 5px;
 	box-shadow: values.$boxShadow;
+	padding: 4rem;
+	&__data {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10rem;
+		p {
+			font-size: 2.5rem;
+			a {
+				text-decoration: none;
+				color: colors.$orange;
+			}
+		}
+	}
 }
