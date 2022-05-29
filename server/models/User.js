@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
 		default: false,
 	},
 	desk: { type: mongoose.Schema.Types.ObjectId, ref: "Desk", default:null},
-	intialPass: { type: Boolean, default: true},
+	initialPass: { type: Boolean, default: true},
 	resetKey: { type: String, default: null}
 });
 

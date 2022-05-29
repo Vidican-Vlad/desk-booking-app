@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const isStringInvalid = require("./isStringInvalid");
+var cron = require("node-cron");
+
 
 const addOwnAccToReq =  async (req, res, next ) =>{
     try {
@@ -65,8 +67,8 @@ const checkIfAdmin = async ( req, res, next ) =>{
 }
 const checkIfInitialPass = async ( req, res, next ) =>{
     try {
-        console.log(req.auth);
-        if(req.auth.checkIfInitialPass)
+        console.log.
+        if(req.auth.initialPass)
             return res.status(400).json({msg: "account creation process not finished, initial password must be changed"});
         next();
     } catch (err) {
@@ -87,6 +89,29 @@ const validateRegisterReq =  async ( req, res, next ) =>{
         console.log(err);
         return res.status(400).json(err);
     }
+}
+
+function dateTimeToCronExp(date){
+    if(date instanceof Date)
+    {
+        const minutes = date.getMinutes();
+        const hours = date.getHours();
+        const days = date.getDate();
+        const months = date.getMonth() + 1;
+        const dayOfWeek = date.getDay();
+
+        console.log(`${minutes} ${hours} ${days} ${months} ${dayOfWeek}`);
+    
+        //return `${minutes} ${hours} ${days} ${months} ${dayOfWeek}`;
+    }
+    else
+    {
+        console.log("not a date");
+
+    }
+    return null;
+   
+
 }
 
 const validateLogin = async ( req, res, next ) =>{

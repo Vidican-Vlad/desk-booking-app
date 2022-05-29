@@ -7,9 +7,6 @@ const Booking = require("../models/Booking");
 const moment = require("moment");
 moment().format();
 
-
-
-
 const createOffice = async (req, res) =>{
     try {
         
@@ -63,7 +60,7 @@ const makeDeskAssignable = async (req, res) => {
     try {
 
         const desk = req.desk;
-        if(!desk)
+        if(!desk.Bookable)
             return res.status(400).json({msg: "account was already assignable"})
         desk.Bookable = false;
 
@@ -82,9 +79,8 @@ const makeDeskBookable = async (req, res) => {
     try{
         
         const desk = req.desk;
-        if(desk)
+        if(desk.Bookable)
             return res.status(400).json({msg: "desk was already bookable"});
-        
         desk.Bookable = true;
         await desk.save();
         return res.status(200).json({msg: "desk is now bookable!"});

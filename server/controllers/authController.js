@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("../config/nodemailer")
+const nodemailer = require("../config/nodemailer");
+var cron = require("node-cron");
 
 const registerUser = async (req, res) => {
 	try {
@@ -26,6 +27,11 @@ const generatePassResetKey = async (req, res) =>{
 		const key = generateResetToken();
 		const user = req.auth;
 		user.resetKey = key;
+		const date = new Date();
+		cron.schedule(dateTimeToCronExp(new Date(date.getTime() + 3*60000)), async () => {
+			await deleteResetKey(user);
+		})
+
 		await Promise.all([ nodemailer.sendResetToken(user.email, user.firstName, key), user.save() ]);
 		return res.status(200).json({msg: "reset token was genereated and sent to the user"});
 	} catch (err) {
@@ -34,13 +40,20 @@ const generatePassResetKey = async (req, res) =>{
 	}
 }
 
+async function deleteResetKey(user)
+{
+	user.resetKey = null;
+	await user.save();
+}
+
 const changePassword = async (req, res) =>{
 	try {
 		const user = req.auth;
-		user.initialPassword = false;
-		user.password = hashPass(req.body.password);
+		user.initialPass = false;
+		user.password =  await hashPass(req.body.password);
 		await user.save();
-		return res.status(200).json({msg: "passwrod was changed"})
+		console.log(user);
+		return res.status(200).json({msg: "password was changed"})
 		
 	} catch (err) {
 		console.log(err);
@@ -67,10 +80,12 @@ const registerAdmin = async (req, res) => {
 	}
 };
 
+
 const loginUser = async (req, res) => {
 	try {
 		//console.log(req.user);
 		const token = generateToken(req.user._id, req.user.initialPass);
+		
 		res.status(200).json({ token: token, isAdmin: req.user.admin });
 	} catch (err) {
 		res.status(500).json(err);
@@ -87,6 +102,28 @@ function generateToken(id, initialPass) {
 }
 function generateResetToken() {
 	return Math.random().toString(36).substr(2, 5)
+}
+
+function dateTimeToCronExp(date){
+    if(date instanceof Date)
+    {
+        const minutes = date.getMinutes();
+        const hours = date.getHours();
+        const days = date.getDate();
+        const months = date.getMonth() + 1;
+        const dayOfWeek = date.getDay();
+
+        //console.log(`${minutes} ${hours} ${days} ${months} ${dayOfWeek}`);
+    
+        return `${minutes} ${hours} ${days} ${months} ${dayOfWeek}`;
+    }
+    else
+    {
+        console.log("not a date");
+
+    }
+    return null;
+
 }
 
 module.exports = {

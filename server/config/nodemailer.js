@@ -35,7 +35,7 @@ var transport = nodemailer.createTransport({
     try {
        const html= `<div style="background-color:grey;text-align:center;padding:10px 10px 10px 10px;color:white;">
        <h3> Hello ${firstName} <h3>
-        <p>here is your password reset token, it will expire in a few minutes, so please complete the procedure now if you can, however, in case it expires feel free to request the password reset again</p>
+        <p>here is your password reset token: ${token}, it will expire in a few minutes, so please complete the procedure now if you can, however, in case it expires feel free to request the password reset again</p>
         <p>kind regards, the Desk Booking Staff</p>
    </div>`
        await transport.sendMail({
