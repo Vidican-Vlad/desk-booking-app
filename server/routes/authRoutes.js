@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/authController");
-const { addOwnAccToReq, checkIFEmailAlreadyUsed, checkIfAdmin, validateLogin, validateRegisterReq  } = require("../middleware/UserMiddleware")
+const { addOwnAccToReq, checkIFEmailAlreadyUsed, checkIfAdmin, validateLogin, validateRegisterReq, validatePasswordChange } = require("../middleware/UserMiddleware")
 const auth = require("../middleware/auth");
 
 
@@ -13,5 +13,7 @@ router.post("/register", auth, addOwnAccToReq, checkIfAdmin, checkIFEmailAlready
 
 //LOGIN
 router.post("/login", validateLogin, controller.loginUser);
+router.put("/initPassReset", auth, addOwnAccToReq, controller.generatePassResetKey);
+router.put("/changePassword", auth, addOwnAccToReq, validatePasswordChange, controller.changePassword);
 
 module.exports = router;

@@ -63,6 +63,17 @@ const checkIfAdmin = async ( req, res, next ) =>{
         return res.status(400).json(err);
     }
 }
+const checkIfInitialPass = async ( req, res, next ) =>{
+    try {
+        console.log(req.auth);
+        if(req.auth.checkIfInitialPass)
+            return res.status(400).json({msg: "account creation process not finished, initial password must be changed"});
+        next();
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err);   
+    }
+}
 
 const validateRegisterReq =  async ( req, res, next ) =>{
     try {
@@ -103,7 +114,24 @@ const validateLogin = async ( req, res, next ) =>{
     }
 }
 
+const validatePasswordChange = async ( req, res, next ) =>{
+    try {
+
+        const { password , token } = req.body;
+        if (isStringInvalid(password))
+            return res.status(400).json({msg: "missing or invalid password"});
+        if(token != req.auth.resetKey)
+            return res.status(400).json({msg: "the reset token was incorrect"});
+        next();
+    } catch (err) {
+        console.log(err)
+        return res.status(400).json(err);
+    }
+
+
+}
 
 
 
-module.exports = { addOwnAccToReq, addUsertoReq, checkIfAdmin, checkIFEmailAlreadyUsed, validateRegisterReq, validateLogin };
+
+module.exports = { validatePasswordChange, addOwnAccToReq, addUsertoReq, checkIfAdmin, checkIfInitialPass, checkIFEmailAlreadyUsed, validateRegisterReq, validateLogin };

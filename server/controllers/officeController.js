@@ -146,6 +146,7 @@ const getFloor = async (req, res) =>{
         let desks = await Desk.find({FloorID: req.floor._id});
         desks = desks.map(el => {
            return {
+               _id: el._id,
                 name: el.Name,
                 shape: "poly",
                 preFillColor: "Green",
@@ -222,7 +223,7 @@ async function createDeskPromise(desk, OfficeID, FloorID){
                 Bookable: true,
                 upLeft: desk.upLeft,
                 upRight: desk.upRight,
-                downLeft: desk.downRight,
+                downLeft: desk.downLeft,
                 downRight: desk.downRight
             })
         }

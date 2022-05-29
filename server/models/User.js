@@ -9,8 +9,9 @@ var UserSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
-	desk: { type: mongoose.Schema.Types.ObjectId, ref: "Desk", default:null}
-	
+	desk: { type: mongoose.Schema.Types.ObjectId, ref: "Desk", default:null},
+	intialPass: { type: Boolean, default: true},
+	resetKey: { type: String, default: null}
 });
 
 module.exports = mongoose.model("User", UserSchema);
